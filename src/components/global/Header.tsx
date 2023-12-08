@@ -11,14 +11,14 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 import Link from "next/link";
 import { useState } from "react";
 
-function Header() {
+export default function Header() {
   const [toggle, setToggle] = useState(false);
   const handleToggle = () => {
     setToggle(!toggle);
   };
   return (
     <header>
-      <div className="text-neutral-50 py-1 flex item-center justify-between px-52  max-xl:px-8 max-md:px-4 text-xs bg-neutral-950">
+      <div className="text-neutral-50 py-1 flex item-center justify-between px-52 max-xl:px-8 max-md:px-4 text-xs bg-neutral-950">
         <div className="flex items-center gap-2">
           <h1 className="mr-4">Suara Dinamika.</h1>
           <Link className="max-md:hidden" href="/">
@@ -170,5 +170,3 @@ function Header() {
     </header>
   );
 }
-
-export default Header;
