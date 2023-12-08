@@ -70,7 +70,7 @@ export default function Header() {
         </div>
       </div>
       <nav className="flex px-52 max-xl:px-8 max-md:px-4 items-center justify-between py-2 border-y border-neutral-950">
-        <div className="md:hidden px-4 py-3 bg-neutral-950 text-neutral-50 ">
+        <div className="md:hidden p-2 text-xl bg-neutral-950 text-neutral-50 ">
           <h1 className="font-bold">SUARA DINAMIKA</h1>
         </div>
         <div onClick={handleToggle} className="cursor-pointer md:hidden">
@@ -123,7 +123,7 @@ export default function Header() {
         </div>
       </nav>
       <aside
-        className={`${toggle ? "visible opacity-100 translate-x-0" : "invisible opacity-0 translate-x-96"} md:hidden duration-300 flex flex-col fixed right-0 top-0 bottom-0 w-full bg-neutral-950 text-neutral-50 p-8 gap-2 `}
+        className={`${toggle ? "visible opacity-100 translate-x-0" : "invisible opacity-0 translate-x-96"} z-20 md:hidden duration-300 flex flex-col fixed right-0 top-0 bottom-0 w-full bg-neutral-950 text-neutral-50 p-8 gap-2 `}
       >
         <div className="mt-6 mb-4">
           <h1 className="text-2xl font-bold">SUARA DINAMIKA</h1>
