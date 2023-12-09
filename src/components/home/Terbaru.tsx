@@ -1,9 +1,9 @@
-export default function Latest() {
+export default function Terbaru() {
   return (
-    <main className="px-52 max-xl:px-8 max-md:px-4 py-8 flex flex-col gap-2">
+    <main className="px-36 max-xl:px-12 max-md:px-4 py-8 flex flex-col gap-2">
       <div>
         <h1 className="font-semibold text-xl p-2 bg-neutral-950 text-neutral-50 w-fit">
-          BERITA TERBARU
+          ARTIKEL TERBARU
         </h1>
         <div className="h-1 w-full bg-neutral-950" />
       </div>
@@ -68,7 +68,7 @@ export default function Latest() {
               alt=""
             />
             <div className="absolute bottom-0 left-0 p-2 pt-3 flex flex-col gap-2 bg-gradient-to-t from-neutral-950/50 to-transparent">
-              <h2 className="font-medium text-xs text-neutral-50">
+              <h2 className="font-medium max-md:text-xs text-neutral-50">
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 Tempora assumenda doloribus quas molestias.
               </h2>
@@ -84,7 +84,7 @@ export default function Latest() {
               alt=""
             />
             <div className="absolute bottom-0 left-0 p-2 pt-3 flex flex-col gap-2 bg-gradient-to-t from-neutral-950/50 to-transparent">
-              <h2 className="font-medium text-xs text-neutral-50">
+              <h2 className="font-medium max-md:text-xs text-neutral-50">
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 Tempora assumenda doloribus quas molestias.
               </h2>

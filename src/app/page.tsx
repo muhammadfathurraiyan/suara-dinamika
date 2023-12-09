@@ -1,9 +1,13 @@
-import Latest from "@/components/home/Latest";
+import Terbaru from "@/components/home/Terbaru";
+import Berita from "@/components/home/Berita";
+import Lingkungan from "@/components/home/Lingkungan";
 
 export default function Home() {
   return (
     <>
-      <Latest />
+      <Terbaru />
+      <Berita />
+      <Lingkungan />
     </>
   );
 }

@@ -18,7 +18,7 @@ export default function Header() {
   };
   return (
     <header>
-      <div className="text-neutral-50 py-1 flex item-center justify-between px-52 max-xl:px-8 max-md:px-4 text-xs bg-neutral-950">
+      <div className="text-neutral-50 py-1 flex item-center justify-between px-36 max-xl:px-12 max-md:px-4 text-xs bg-neutral-950">
         <div className="flex items-center gap-2">
           <h1 className="mr-4">Suara Dinamika.</h1>
           <Link className="max-md:hidden" href="/">
@@ -43,7 +43,7 @@ export default function Header() {
           </Link>
         </div>
       </div>
-      <div className="px-52 max-xl:px-8 max-md:px-4 max-md:hidden">
+      <div className="px-36 mt-80 max-xl:px-12 max-md:px-4 max-md:hidden">
         <div className="flex items-center justify-between py-8">
           <div className="px-4 py-3 bg-neutral-950 text-neutral-50 ">
             <h1 className="text-3xl font-bold">SUARA DINAMIKA</h1>
@@ -69,7 +69,7 @@ export default function Header() {
           </div>
         </div>
       </div>
-      <nav className="flex px-52 max-xl:px-8 max-md:px-4 items-center justify-between py-2 border-y border-neutral-950">
+      <nav className="flex px-36 max-xl:px-12 max-md:px-4 items-center justify-between py-2 border-y border-neutral-950">
         <div className="md:hidden p-2 text-xl bg-neutral-950 text-neutral-50 ">
           <h1 className="font-bold">SUARA DINAMIKA</h1>
         </div>
@@ -104,9 +104,13 @@ export default function Header() {
           TEKNOLOGI
           <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-950 left-0 bottom-0" />
         </Link>
+        <Link className="group relative max-md:hidden" href="/">
+          TRAVEL
+          <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-950 left-0 bottom-0" />
+        </Link>
         <div className="relative group max-md:hidden p-2 flex items-center">
           LAINYA <FaAngleDown />
-          <div className="absolute invisible group-hover:visible opacity-0 group-hover:opacity-100 flex duration-300 bg-neutral-50 border border-neutral-950/30 flex-col gap-2 items-start left-0 top-10 px-2 py-4">
+          <div className="absolute z-20 invisible group-hover:visible opacity-0 group-hover:opacity-100 flex duration-300 bg-neutral-50 border border-neutral-950/30 flex-col gap-2 items-start left-0 top-10 px-2 py-4">
             <Link className="relative group/link" href="/">
               SEJARAH
               <span className="absolute duration-300 h-[1px] w-0 group-hover/link:w-full bg-neutral-950 left-0 bottom-0" />
