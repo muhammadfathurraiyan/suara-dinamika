@@ -1,13 +1,14 @@
-import bg from "@/assets/bg.jpg";
-export default function Lingkungan() {
+import sejarah from "@/assets/sejarah.jpg";
+
+export default function Sejarah() {
   return (
     <section
-      style={{ backgroundImage: `url(${bg.src})` }}
+      style={{ backgroundImage: `url(${sejarah.src})` }}
       className="px-36 max-xl:px-12 max-md:px-4 py-16 flex flex-col gap-2 relative bg-bottom bg-no-repeat bg-cover"
     >
       <div className="z-10">
         <h1 className="font-semibold text-xl p-2 bg-neutral-950 text-neutral-50 w-fit">
-          LINGKUNGAN
+          SEJARAH
         </h1>
         <div className="h-1 w-full bg-neutral-950 md:hidden" />
       </div>
