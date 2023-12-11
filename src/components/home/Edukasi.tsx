@@ -1,6 +1,6 @@
 export default function Edukasi() {
   return (
-    <section className="px-36 max-xl:px-12 max-md:px-4 py-8 flex flex-col gap-2 mb-80">
+    <section className="px-36 max-xl:px-12 max-md:px-4 py-8 flex flex-col gap-2">
       <div>
         <h1 className="font-semibold text-xl p-2 bg-neutral-950 text-neutral-50 w-fit">
           EDUKASI
