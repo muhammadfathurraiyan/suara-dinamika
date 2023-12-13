@@ -10,8 +10,10 @@ import {
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+  const path = usePathname();
   const [toggle, setToggle] = useState(false);
   const handleToggle = () => {
     setToggle(!toggle);
@@ -20,7 +22,9 @@ export default function Header() {
     <header>
       <div className="text-neutral-50 py-1 flex item-center justify-between px-36 max-xl:px-12 max-md:px-4 text-xs bg-neutral-950">
         <div className="flex items-center gap-2">
-          <h1 className="mr-4">Suara Dinamika.</h1>
+          <Link href="/" className="mr-4">
+            Suara Dinamika.
+          </Link>
           <Link className="max-md:hidden" href="/">
             Beranda
           </Link>
@@ -43,15 +47,19 @@ export default function Header() {
           </Link>
         </div>
       </div>
-      <div className="px-36 mt-80 max-xl:px-12 max-md:px-4 max-md:hidden">
+      <div
+        className={`px-36 ${
+          path === "/" ? "mt-80" : "mt-0"
+        } max-xl:px-12 max-md:px-4 max-md:hidden`}
+      >
         <div className="flex items-center justify-between py-8">
-          <div className="px-4 py-3 bg-neutral-950 text-neutral-50 ">
+          <Link href="/" className="px-4 py-3 bg-neutral-950 text-neutral-50 ">
             <h1 className="text-3xl font-bold">SUARA DINAMIKA</h1>
             <div className="flex items-center gap-1">
               <div className="h-[1px] w-12 bg-neutral-50" />
               <p className="text-xs italic font-light">Unik & Terpercaya.</p>
             </div>
-          </div>
+          </Link>
           <div>
             <form className="flex items-center relative" action="">
               <input
@@ -76,35 +84,35 @@ export default function Header() {
         <div onClick={handleToggle} className="cursor-pointer md:hidden">
           <FaBars size={24} />
         </div>
-        <Link className="group relative max-md:hidden" href="/">
+        <Link className="group relative max-md:hidden" href="/budaya">
           BUDAYA
           <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-950 left-0 bottom-0" />
         </Link>
-        <Link className="group relative max-md:hidden" href="/">
+        <Link className="group relative max-md:hidden" href="/edukasi">
           EDUKASI
           <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-950 left-0 bottom-0" />
         </Link>
-        <Link className="group relative max-md:hidden" href="/">
+        <Link className="group relative max-md:hidden" href="/lingkungan">
           LINGKUNGAN
           <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-950 left-0 bottom-0" />
         </Link>
-        <Link className="group relative max-md:hidden" href="/">
+        <Link className="group relative max-md:hidden" href="/opini">
           OPINI
           <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-950 left-0 bottom-0" />
         </Link>
-        <Link className="group relative max-md:hidden" href="/">
+        <Link className="group relative max-md:hidden" href="/sejarah">
           SEJARAH
           <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-950 left-0 bottom-0" />
         </Link>
-        <Link className="group relative max-md:hidden" href="/">
+        <Link className="group relative max-md:hidden" href="/seni">
           SENI
           <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-950 left-0 bottom-0" />
         </Link>
-        <Link className="group relative max-md:hidden" href="/">
+        <Link className="group relative max-md:hidden" href="/teknologi">
           TEKNOLOGI
           <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-950 left-0 bottom-0" />
         </Link>
-        <Link className="group relative max-md:hidden" href="/">
+        <Link className="group relative max-md:hidden" href="/travel">
           TRAVEL
           <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-950 left-0 bottom-0" />
         </Link>
@@ -127,7 +135,11 @@ export default function Header() {
         </div>
       </nav>
       <aside
-        className={`${toggle ? "visible opacity-100 translate-x-0" : "invisible opacity-0 translate-x-96"} z-20 md:hidden duration-300 flex flex-col fixed right-0 top-0 bottom-0 w-full bg-neutral-950 text-neutral-50 p-8 gap-2 `}
+        className={`${
+          toggle
+            ? "visible opacity-100 translate-x-0"
+            : "invisible opacity-0 translate-x-96"
+        } z-20 md:hidden duration-300 flex flex-col fixed right-0 top-0 bottom-0 w-full bg-neutral-950 text-neutral-50 p-8 gap-2 `}
       >
         <div className="mt-6 mb-4">
           <h1 className="text-2xl font-bold">SUARA DINAMIKA</h1>
