@@ -21,17 +21,20 @@ export default function Header() {
   return (
     <header>
       <div className="text-neutral-50 py-1 flex item-center justify-between px-36 max-xl:px-12 max-md:px-4 text-xs bg-neutral-950">
-        <div className="flex items-center gap-2">
-          <Link href="/" className="mr-4">
+        <div className="flex items-center gap-4">
+          <Link href="/" className="mr-8">
             Suara Dinamika.
           </Link>
-          <Link className="max-md:hidden" href="/">
-            Beranda
-          </Link>
-          <Link className="max-md:hidden" href="/">
+          <Link className="max-md:hidden" href="/tentang">
             Tentang
           </Link>
+          <Link className="max-md:hidden" href="/tentang">
+            FAQ
+          </Link>
           <Link className="max-md:hidden" href="/">
+            Advertise
+          </Link>
+          <Link className="max-md:hidden" href="/kontak">
             Kontak
           </Link>
         </div>
