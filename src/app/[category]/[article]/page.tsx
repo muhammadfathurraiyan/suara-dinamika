@@ -24,23 +24,37 @@ export default function Article({
           <div className="flex gap-2 items-center">
             <Link
               href="/"
-              className="p-2 text-neutral-50 bg-green-500 text-2xl"
+              aria-label="Whatsapp"
+              className="p-2 text-neutral-100 bg-green-500 text-2xl"
             >
               <IoLogoWhatsapp />
             </Link>
-            <Link href="/" className="p-2 text-neutral-50 bg-blue-700 text-2xl">
+            <Link
+              href="/"
+              aria-label="Facebook"
+              className="p-2 text-neutral-100 bg-blue-700 text-2xl"
+            >
               <FaFacebookF />
             </Link>
             <Link
               href="/"
-              className="p-2 text-neutral-50 bg-neutral-950 text-2xl"
+              aria-label="X"
+              className="p-2 text-neutral-100 bg-neutral-900 text-2xl"
             >
               <FaXTwitter />
             </Link>
-            <Link href="/" className="p-2 text-neutral-50 bg-cyan-600 text-2xl">
+            <Link
+              href="/"
+              aria-label="Telegram"
+              className="p-2 text-neutral-100 bg-cyan-600 text-2xl"
+            >
               <FaTelegramPlane />
             </Link>
-            <Link href="/" className="p-2 text-neutral-50 bg-red-600 text-2xl">
+            <Link
+              href="/"
+              aria-label="Share"
+              className="p-2 text-neutral-100 bg-red-600 text-2xl"
+            >
               <IoShareSocialSharp />
             </Link>
           </div>
@@ -87,7 +101,7 @@ export default function Article({
           </div>
           <div className="flex flex-col gap-4 mt-2">
             <div className="flex items-center gap-2 flex-wrap">
-              <p className="p-2 bg-neutral-950 text-neutral-50 w-fit text-xs">
+              <p className="p-2 bg-neutral-900 text-neutral-100 w-fit text-xs">
                 BUDAYA
               </p>
               <p className="text-xs">&#8226; 10 menit yang lalu</p>
@@ -108,31 +122,36 @@ export default function Article({
               <div className="flex gap-2 items-center">
                 <Link
                   href="/"
-                  className="p-2 text-neutral-50 bg-green-500 text-2xl"
+                  aria-label="Whatsapp"
+                  className="p-2 text-neutral-100 bg-green-500 text-2xl"
                 >
                   <IoLogoWhatsapp />
                 </Link>
                 <Link
                   href="/"
-                  className="p-2 text-neutral-50 bg-blue-700 text-2xl"
+                  aria-label="Facebook"
+                  className="p-2 text-neutral-100 bg-blue-700 text-2xl"
                 >
                   <FaFacebookF />
                 </Link>
                 <Link
                   href="/"
-                  className="p-2 text-neutral-50 bg-neutral-950 text-2xl"
+                  aria-label="X"
+                  className="p-2 text-neutral-100 bg-neutral-900 text-2xl"
                 >
                   <FaXTwitter />
                 </Link>
                 <Link
                   href="/"
-                  className="p-2 text-neutral-50 bg-cyan-600 text-2xl"
+                  aria-label="Telegram"
+                  className="p-2 text-neutral-100 bg-cyan-600 text-2xl"
                 >
                   <FaTelegramPlane />
                 </Link>
                 <Link
                   href="/"
-                  className="p-2 text-neutral-50 bg-red-600 text-2xl"
+                  aria-label="Share"
+                  className="p-2 text-neutral-100 bg-red-600 text-2xl"
                 >
                   <IoShareSocialSharp />
                 </Link>
@@ -142,13 +161,13 @@ export default function Article({
         </div>
         <div className="flex flex-col gap-2 mb-80 md:mt-[25.25rem]">
           <div>
-            <h1 className="font-semibold p-2 text-xl bg-neutral-950 text-neutral-50 w-fit uppercase">
+            <h1 className="font-semibold p-2 text-xl bg-neutral-900 text-neutral-100 w-fit uppercase">
               REKOMENDASI
             </h1>
           </div>
           <Link
             href="/"
-            className="grid border border-neutral-950/30 grid-rows-2 w-full h-[24.5rem] gap-2"
+            className="grid border border-neutral-900/30 grid-rows-2 w-full h-[24.5rem] gap-2"
           >
             <div className=" group overflow-hidden">
               <img
@@ -166,7 +185,7 @@ export default function Article({
                 <p className="text-xs">&#8226; 10 menit yang lalu</p>
               </div>
               <div className="flex items-center gap-2 flex-wrap">
-                <p className="p-2 bg-neutral-950 text-neutral-50 w-fit text-xs">
+                <p className="p-2 bg-neutral-900 text-neutral-100 w-fit text-xs">
                   BUDAYA
                 </p>
               </div>
@@ -174,7 +193,7 @@ export default function Article({
           </Link>
           <Link
             href="/"
-            className="flex h-48 border border-neutral-950/30 flex-col p-2 justify-between items-start"
+            className="flex h-48 border border-neutral-900/30 flex-col p-2 justify-between items-start"
           >
             <div className="flex items-center gap-2 flex-wrap">
               <h2 className="font-medium md:text-lg">
@@ -184,14 +203,14 @@ export default function Article({
               <p className="text-xs">&#8226; 10 menit yang lalu</p>
             </div>
             <div className="flex items-center gap-2 flex-wrap">
-              <p className="p-2 bg-neutral-950 text-neutral-50 w-fit text-xs">
+              <p className="p-2 bg-neutral-900 text-neutral-100 w-fit text-xs">
                 BUDAYA
               </p>
             </div>
           </Link>
           <Link
             href="/"
-            className="flex h-48 border border-neutral-950/30 flex-col p-2 justify-between items-start"
+            className="flex h-48 border border-neutral-900/30 flex-col p-2 justify-between items-start"
           >
             <div className="flex items-center gap-2 flex-wrap">
               <h2 className="font-medium md:text-lg">
@@ -201,7 +220,7 @@ export default function Article({
               <p className="text-xs">&#8226; 10 menit yang lalu</p>
             </div>
             <div className="flex items-center gap-2 flex-wrap">
-              <p className="p-2 bg-neutral-950 text-neutral-50 w-fit text-xs">
+              <p className="p-2 bg-neutral-900 text-neutral-100 w-fit text-xs">
                 BUDAYA
               </p>
             </div>
@@ -210,15 +229,15 @@ export default function Article({
       </div>
       <div className="flex flex-col gap-2">
         <div>
-          <h1 className="font-semibold p-2 text-xl bg-neutral-950 text-neutral-50 w-fit uppercase">
+          <h1 className="font-semibold p-2 text-xl bg-neutral-900 text-neutral-100 w-fit uppercase">
             ARTIKEL POPULER
           </h1>
-          <div className="h-1 w-full bg-neutral-950" />
+          <div className="h-1 w-full bg-neutral-900" />
         </div>
         <div className="grid grid-cols-3 max-md:grid-cols-1 gap-2">
           <Link
             href="/"
-            className="flex h-48 border border-neutral-950/30 flex-col p-2 justify-between items-start"
+            className="flex h-48 border border-neutral-900/30 flex-col p-2 justify-between items-start"
           >
             <div className="flex items-center gap-2 flex-wrap">
               <h2 className="font-medium md:text-lg">
@@ -228,14 +247,14 @@ export default function Article({
               <p className="text-xs">&#8226; 10 menit yang lalu</p>
             </div>
             <div className="flex items-center gap-2 flex-wrap">
-              <p className="p-2 bg-neutral-950 text-neutral-50 w-fit text-xs">
+              <p className="p-2 bg-neutral-900 text-neutral-100 w-fit text-xs">
                 BUDAYA
               </p>
             </div>
           </Link>
           <Link
             href="/"
-            className="flex h-48 border border-neutral-950/30 flex-col p-2 justify-between items-start"
+            className="flex h-48 border border-neutral-900/30 flex-col p-2 justify-between items-start"
           >
             <div className="flex items-center gap-2 flex-wrap">
               <h2 className="font-medium md:text-lg">
@@ -245,14 +264,14 @@ export default function Article({
               <p className="text-xs">&#8226; 10 menit yang lalu</p>
             </div>
             <div className="flex items-center gap-2 flex-wrap">
-              <p className="p-2 bg-neutral-950 text-neutral-50 w-fit text-xs">
+              <p className="p-2 bg-neutral-900 text-neutral-100 w-fit text-xs">
                 BUDAYA
               </p>
             </div>
           </Link>
           <Link
             href="/"
-            className="flex h-48 border border-neutral-950/30 flex-col p-2 justify-between items-start"
+            className="flex h-48 border border-neutral-900/30 flex-col p-2 justify-between items-start"
           >
             <div className="flex items-center gap-2 flex-wrap">
               <h2 className="font-medium md:text-lg">
@@ -262,14 +281,14 @@ export default function Article({
               <p className="text-xs">&#8226; 10 menit yang lalu</p>
             </div>
             <div className="flex items-center gap-2 flex-wrap">
-              <p className="p-2 bg-neutral-950 text-neutral-50 w-fit text-xs">
+              <p className="p-2 bg-neutral-900 text-neutral-100 w-fit text-xs">
                 BUDAYA
               </p>
             </div>
           </Link>
           <Link
             href="/"
-            className="flex h-48 border border-neutral-950/30 flex-col p-2 justify-between items-start"
+            className="flex h-48 border border-neutral-900/30 flex-col p-2 justify-between items-start"
           >
             <div className="flex items-center gap-2 flex-wrap">
               <h2 className="font-medium md:text-lg">
@@ -279,14 +298,14 @@ export default function Article({
               <p className="text-xs">&#8226; 10 menit yang lalu</p>
             </div>
             <div className="flex items-center gap-2 flex-wrap">
-              <p className="p-2 bg-neutral-950 text-neutral-50 w-fit text-xs">
+              <p className="p-2 bg-neutral-900 text-neutral-100 w-fit text-xs">
                 BUDAYA
               </p>
             </div>
           </Link>
           <Link
             href="/"
-            className="flex h-48 border border-neutral-950/30 flex-col p-2 justify-between items-start"
+            className="flex h-48 border border-neutral-900/30 flex-col p-2 justify-between items-start"
           >
             <div className="flex items-center gap-2 flex-wrap">
               <h2 className="font-medium md:text-lg">
@@ -296,14 +315,14 @@ export default function Article({
               <p className="text-xs">&#8226; 10 menit yang lalu</p>
             </div>
             <div className="flex items-center gap-2 flex-wrap">
-              <p className="p-2 bg-neutral-950 text-neutral-50 w-fit text-xs">
+              <p className="p-2 bg-neutral-900 text-neutral-100 w-fit text-xs">
                 BUDAYA
               </p>
             </div>
           </Link>
           <Link
             href="/"
-            className="flex h-48 border border-neutral-950/30 flex-col p-2 justify-between items-start"
+            className="flex h-48 border border-neutral-900/30 flex-col p-2 justify-between items-start"
           >
             <div className="flex items-center gap-2 flex-wrap">
               <h2 className="font-medium md:text-lg">
@@ -313,7 +332,7 @@ export default function Article({
               <p className="text-xs">&#8226; 10 menit yang lalu</p>
             </div>
             <div className="flex items-center gap-2 flex-wrap">
-              <p className="p-2 bg-neutral-950 text-neutral-50 w-fit text-xs">
+              <p className="p-2 bg-neutral-900 text-neutral-100 w-fit text-xs">
                 BUDAYA
               </p>
             </div>

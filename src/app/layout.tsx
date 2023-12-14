@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${notoSans.className} text-neutral-950 bg-neutral-50`}>
+      <body className={`${notoSans.className} text-neutral-900 bg-neutral-100`}>
         <Header />
         {children}
         <Footer />
