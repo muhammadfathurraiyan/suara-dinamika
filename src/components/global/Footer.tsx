@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa";
+import { PiInstagramLogo, PiLinkedinLogo, PiYoutubeLogo } from "react-icons/pi";
 
 function Footer() {
   return (
@@ -9,13 +9,13 @@ function Footer() {
         <p className="">Ikuti kami di sosial media :</p>
         <div className="flex items-center gap-2">
           <Link aria-label="Instagram" href="/">
-            <FaInstagram size={24} />
+            <PiInstagramLogo size={28} />
           </Link>
           <Link aria-label="Linkedin" href="/">
-            <FaLinkedin size={24} />
+            <PiLinkedinLogo size={28} />
           </Link>
           <Link aria-label="Youtube" href="/">
-            <FaYoutube size={24} />
+            <PiYoutubeLogo size={28} />
           </Link>
         </div>
       </div>

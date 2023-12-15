@@ -1,16 +1,16 @@
 "use client";
-import {
-  FaInstagram,
-  FaLinkedin,
-  FaYoutube,
-  FaAngleDown,
-  FaBars,
-  FaTimes,
-} from "react-icons/fa";
-import { FaMagnifyingGlass } from "react-icons/fa6";
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import {
+  PiCaretDown,
+  PiInstagramLogo,
+  PiLinkedinLogo,
+  PiList,
+  PiMagnifyingGlass,
+  PiX,
+  PiYoutubeLogo,
+} from "react-icons/pi";
 
 export default function Header() {
   const path = usePathname();
@@ -43,19 +43,21 @@ export default function Header() {
         </div>
         <div className="flex items-center gap-2">
           <Link aria-label="Instagram" href="/">
-            <FaInstagram size={14} />
+            <PiInstagramLogo size={18} />
           </Link>
           <Link aria-label="Linkedin" href="/">
-            <FaLinkedin size={14} />
+            <PiLinkedinLogo size={18} />
           </Link>
           <Link aria-label="Youtube" href="/">
-            <FaYoutube size={14} />
+            <PiYoutubeLogo size={18} />
           </Link>
         </div>
       </div>
       <div
         className={`px-36 ${path === "/" ? "mt-80" : "mt-0"} ${
-          path === "/tentang" && "hidden"
+          path === "/auth" || path.startsWith("/admin") || path === "/tentang"
+            ? "hidden"
+            : ""
         } max-xl:px-12 max-md:px-4 max-md:hidden`}
       >
         <div className="flex items-center justify-between py-8">
@@ -74,13 +76,13 @@ export default function Header() {
               <input
                 type="text"
                 placeholder="Cari Artikel"
-                className="border border-neutral-900 p-1 w-72 focus:outline-none"
+                className="border border-neutral-900 p-1 w-72 focus:outline-none bg-transparent"
               />
               <button
                 aria-label="Search"
-                className="absolute right-0 p-2 flex items-center gap-2 text-neutral-100 bg-neutral-900"
+                className="absolute right-0 p-2 flex items-center gap-2 text-neutral-100 bg-neutral-900 hover:bg-neutral-900/90 duration-300"
               >
-                <FaMagnifyingGlass />
+                <PiMagnifyingGlass size={18} />
               </button>
             </form>
           </div>
@@ -88,14 +90,16 @@ export default function Header() {
       </div>
       <nav
         className={`${
-          path === "/tentang" && "hidden"
+          path === "/auth" || path.startsWith("/admin") || path === "/tentang"
+            ? "hidden"
+            : ""
         } flex px-36 max-xl:px-12 max-md:px-4 items-center justify-between py-2 border-y border-neutral-900`}
       >
         <div className="md:hidden p-2 text-xl bg-neutral-900 text-neutral-100 ">
           <h1 className="font-bold">SUARA DINAMIKA</h1>
         </div>
         <div onClick={handleToggle} className="cursor-pointer md:hidden">
-          <FaBars size={24} />
+          <PiList size={28} />
         </div>
         <Link className="group relative max-md:hidden" href="/budaya">
           BUDAYA
@@ -130,7 +134,7 @@ export default function Header() {
           <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-900 left-0 bottom-0" />
         </Link>
         <div className="relative group max-md:hidden p-2 flex items-center">
-          LAINYA <FaAngleDown />
+          LAINYA <PiCaretDown className="group-hover:rotate-180 duration-300" />
           <div className="absolute z-20 invisible group-hover:visible opacity-0 group-hover:opacity-100 flex duration-300 bg-neutral-100 border border-neutral-900/30 flex-col gap-2 items-start left-0 top-10 px-2 py-4">
             <Link className="relative group/link" href="/">
               SEJARAH
@@ -193,7 +197,7 @@ export default function Header() {
           onClick={handleToggle}
           className="cursor-pointer p-1 rounded-full border w-fit absolute right-4 top-4"
         >
-          <FaTimes size={12} />
+          <PiX size={12} />
         </div>
       </aside>
     </header>
