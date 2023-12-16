@@ -6,6 +6,7 @@ import {
   PiChartLine,
   PiHouse,
   PiSignOut,
+  PiTextColumns,
   PiUserCircleGear,
   PiUserCirclePlus,
 } from "react-icons/pi";
@@ -48,6 +49,18 @@ export default function Sidebar() {
             href="/admin/article"
           >
             <PiArticle size={20} /> Article
+          </Link>
+        </li>
+        <li>
+          <Link
+            className={`flex items-center gap-2 p-2 hover:text-neutral-100 rounded-md ${
+              path === "/admin/all-article"
+                ? "bg-neutral-800 border border-neutral-700 text-neutral-100"
+                : "text-neutral-400"
+            }`}
+            href="/admin/all-article"
+          >
+            <PiTextColumns size={20} /> Semua Article
           </Link>
         </li>
         <li>
