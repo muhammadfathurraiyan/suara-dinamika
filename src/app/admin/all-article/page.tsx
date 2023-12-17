@@ -9,7 +9,7 @@ export default function AllArticle() {
         <p>Halaman total seluruh article.</p>
       </div>
       <div className="relative overflow-x-auto">
-        <table className="w-full text-sm border border-neutral-900">
+        <table className="w-full text-sm border border-neutral-900 shadow-md">
           <thead className="uppercase text-center bg-neutral-900 text-neutral-100">
             <tr>
               <th className="p-2">No</th>

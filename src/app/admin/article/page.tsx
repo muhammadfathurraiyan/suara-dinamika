@@ -6,17 +6,17 @@ export default function Article() {
     <div className="px-4 py-12 flex flex-col gap-12">
       <div>
         <h1 className="text-3xl font-black uppercase">Article</h1>
-        <p>Halaman untuk melakukan CRUD Article</p>
+        <p>Halaman untuk melakukan CRUD article.</p>
       </div>
       <div className="flex flex-col gap-2">
         <Link
           className="py-2 px-8 bg-neutral-900 hover:bg-neutral-900/90 duration-300 uppercase w-fit text-neutral-50"
-          href="/"
+          href="/admin/article/buat-berita"
         >
           Buat
         </Link>
         <div className="relative overflow-x-auto">
-          <table className="w-full text-sm border border-neutral-900">
+          <table className="w-full text-sm border border-neutral-900 shadow-md">
             <thead className="uppercase text-center bg-neutral-900 text-neutral-100">
               <tr>
                 <th className="p-2">No</th>

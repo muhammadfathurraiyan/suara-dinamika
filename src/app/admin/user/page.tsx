@@ -6,12 +6,12 @@ export default function User() {
     <div className="px-4 py-12 flex flex-col gap-12">
       <div>
         <h1 className="text-3xl font-black uppercase">Manage User</h1>
-        <p>Halaman management user</p>
+        <p>Halaman management user.</p>
       </div>
       <div className="flex flex-col gap-2">
         <Link
           className="py-2 px-8 bg-neutral-900 hover:bg-neutral-900/90 duration-300 uppercase w-fit text-neutral-50"
-          href="/"
+          href="/admin/user/tambah-user"
         >
           Tambah
         </Link>
