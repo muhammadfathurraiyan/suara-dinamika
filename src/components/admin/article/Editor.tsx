@@ -1,35 +1,60 @@
 "use client";
-import { EDITOR_JS_TOOLS } from "@/libs/tools";
-import EditorJS from "@editorjs/editorjs";
-import { useEffect, useRef } from "react";
+import { LexicalComposer } from "@lexical/react/LexicalComposer";
+import { PlainTextPlugin } from "@lexical/react/LexicalPlainTextPlugin";
+import { ContentEditable } from "@lexical/react/LexicalContentEditable";
+import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
+import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { EditorState } from "lexical";
+import { useEffect, useState } from "react";
+
+const theme = {};
+
+function onError(error: Error) {
+  console.error(error);
+}
 
 export default function Editor() {
-  const ref = useRef<any>();
-  const initialEditor = () => {
-    const editor = new EditorJS({
-      holder: "editorjs",
-      onReady: () => {
-        console.log("Editor.js is ready to work!");
-        ref.current = editor
-      },
-      autofocus: true,
-      onChange: async() => {
-        let content = await editor.saver.save()
-        console.log(content)
-      },
-      tools: EDITOR_JS_TOOLS,
-    });
+  const [editorState, setEditorState] = useState("");
+  function onChange(editorState: EditorState) {
+    const editorStateJSON = editorState.toJSON();
+    setEditorState(JSON.stringify(editorStateJSON));
+  }
+
+  const initialConfig = {
+    namespace: "MyEditor",
+    theme,
+    onError,
   };
 
-  useEffect(() => {
-    if(ref.current === null){
-      initialEditor()
-    }
+  function OnChangePlugin({
+    onChange,
+  }: {
+    onChange: (editorState: EditorState) => void;
+  }): undefined {
+    const [editor] = useLexicalComposerContext();
+    useEffect(() => {
+      return editor.registerUpdateListener(({ editorState }) => {
+        onChange(editorState);
+      });
+    }, [editor, onChange]);
+  }
 
-    return () => {
-      ref?.current?.destroy()
-      ref.current = null
-    }
-  }, []);
-  return <div id="editorjs"></div>;
+  return (
+    <div className="relative">
+      <LexicalComposer initialConfig={initialConfig}>
+        <PlainTextPlugin
+          contentEditable={
+            <ContentEditable className="w-3/4 min-h-screen border p-2 border-neutral-900/30 duration-300 focus:outline-neutral-900/50" />
+          }
+          placeholder={
+            <div className="absolute p-2 top-0">Enter some text...</div>
+          }
+          ErrorBoundary={LexicalErrorBoundary}
+        />
+        <HistoryPlugin />
+        <OnChangePlugin onChange={onChange} />
+      </LexicalComposer>
+    </div>
+  );
 }

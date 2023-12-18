@@ -28,19 +28,18 @@ import Marker from "@editorjs/marker";
 import CheckList from "@editorjs/checklist";
 
 export const EDITOR_JS_TOOLS = {
-  // NOTE: Paragraph is default tool. Declare only when you want to change paragraph option.
-  paragraph: Paragraph,
-  embed: Embed,
-  table: Table,
-  list: List,
-  warning: Warning,
-  code: Code,
-  linkTool: LinkTool,
   image: Image,
-  raw: Raw,
   header: Header,
+  paragraph: Paragraph,
+  list: List,
+  checklist: CheckList,
+  warning: Warning,
+  raw: Raw,
   quote: Quote,
   marker: Marker,
-  checklist: CheckList,
   delimiter: Delimiter,
+  code: Code,
+  linkTool: LinkTool,
+  embed: Embed,
+  table: Table,
 };
