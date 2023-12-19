@@ -18,41 +18,56 @@ export default function Crud({ params }: { params: { crud: string } }) {
         </h1>
         <p>Halaman {params.crud.replace("-", " ")}.</p>
       </div>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-4">
         <p className="text-xl font-bold">
           Form {params.crud.replace("-", " ")}:
         </p>
-        <form className="flex flex-col gap-7 w-full" action="">
-          <input
-            className="bg-transparent w-1/3 focus:outline-none p-2 border-b border-neutral-900/30 focus:border-b-2 focus:border-neutral-900/50"
-            type="text"
-            placeholder="Judul"
-          />
-          <input
-            className="bg-transparent w-1/3 focus:outline-none p-2 border-b border-neutral-900/30 focus:border-b-2 focus:border-neutral-900/50"
-            type="text"
-            placeholder="Slug"
-          />
-          <select
-            required
-            className="bg-transparent w-1/3 required:invalid:text-neutral-900/50 focus:outline-none p-2 border-b border-neutral-900/30 focus:border-b-2 focus:border-neutral-900/50"
-          >
-            <option value="" disabled selected hidden>
-              Pilih Kategori
-            </option>
-            <option className="text-neutral-900" value="1">
-              Budaya
-            </option>
-            <option className="text-neutral-900" value="2">
-              Teknologi
-            </option>
-          </select>
-          <div>
-            <label className="font-semibold" htmlFor="image">
-              Foto
+        <form className="flex flex-col gap-4 w-full" action="">
+          <div className="flex flex-col">
+            <label className="font-semibold text-sm" htmlFor="title">
+              Judul
             </label>
             <input
-              className="bg-transparent w-1/3 text-sm focus:outline-none p-2 border border-neutral-900/30 focus:border-neutral-900/50"
+              className="bg-transparent w-1/2 focus:outline-none p-2 border border-neutral-900/30 focus:border-2 focus:border-neutral-900/50"
+              type="text"
+              placeholder="Judul"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label className="font-semibold text-sm" htmlFor="slug">
+              Slug
+            </label>
+            <input
+              className="bg-transparent w-1/2 focus:outline-none p-2 border border-neutral-900/30 focus:border-2 focus:border-neutral-900/50"
+              type="text"
+              placeholder="Slug"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label className="font-semibold text-sm" htmlFor="category">
+              Kategori
+            </label>
+            <select
+              required
+              className="bg-transparent w-1/2 required:invalid:text-neutral-900/40 required:invalid:font-semibold focus:outline-none p-2 border border-neutral-900/30 focus:border-2 focus:border-neutral-900/50"
+            >
+              <option value="" disabled selected hidden>
+                Pilih Kategori
+              </option>
+              <option className="text-neutral-900" value="1">
+                Budaya
+              </option>
+              <option className="text-neutral-900" value="2">
+                Teknologi
+              </option>
+            </select>
+          </div>
+          <div className="flex flex-col">
+            <label className="font-semibold text-sm" htmlFor="image">
+              Foto Sampul
+            </label>
+            <input
+              className="bg-transparent w-1/2 text-sm focus:outline-none p-2 border border-neutral-900/30 focus:border-neutral-900/50"
               type="file"
             />
           </div>
