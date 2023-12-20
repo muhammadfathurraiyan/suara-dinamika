@@ -1,8 +1,11 @@
-import Editor from "@/components/admin/article/Editor";
+"use client";
+import Editor from "@/components/admin/article/editor/Editor";
 import Link from "next/link";
+import { ChangeEvent, useState } from "react";
 import { PiArrowLeftBold } from "react-icons/pi";
 
 export default function Crud({ params }: { params: { crud: string } }) {
+  const [selectedOption, setSelectedOption] = useState("0");
   return (
     <div className="relative px-4 py-12 flex flex-col gap-12">
       <Link
@@ -49,9 +52,15 @@ export default function Crud({ params }: { params: { crud: string } }) {
             </label>
             <select
               required
-              className="bg-transparent w-1/2 required:invalid:text-neutral-900/40 required:invalid:font-semibold focus:outline-none p-2 border border-neutral-900/30 focus:border-2 focus:border-neutral-900/50"
+              value={selectedOption}
+              onChange={(e) => setSelectedOption(e.target.value)}
+              className={`bg-transparent w-1/2 ${
+                selectedOption === "0"
+                  ? "text-neutral-900/40 font-semibold"
+                  : ""
+              } focus:outline-none p-2 border border-neutral-900/30 focus:border-2 focus:border-neutral-900/50`}
             >
-              <option value="" disabled selected hidden>
+              <option value="0" disabled hidden>
                 Pilih Kategori
               </option>
               <option className="text-neutral-900" value="1">

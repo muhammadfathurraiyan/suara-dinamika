@@ -1,10 +1,17 @@
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 import { PiInstagramLogo, PiLinkedinLogo, PiYoutubeLogo } from "react-icons/pi";
 
 function Footer() {
+  const path = usePathname();
   return (
-    <footer className="px-36 max-xl:px-12 max-md:px-4 py-8 flex flex-col items-center justify-center gap-4 bg-neutral-900 text-neutral-100">
+    <footer
+      className={`${
+        path.includes("/admin") && "hidden"
+      } px-36 max-xl:px-12 max-md:px-4 py-8 flex flex-col items-center justify-center gap-4 bg-neutral-900 text-neutral-100`}
+    >
       <div className="flex items-center flex-col">
         <p className="">Ikuti kami di sosial media :</p>
         <div className="flex items-center gap-2">

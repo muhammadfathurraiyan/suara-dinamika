@@ -1,38 +1,35 @@
-export const editorTheme = {
-  ltr: "text-left",
-  rtl: "text-right",
+const exampleTheme = {
+  ltr: "ltr",
+  rtl: "rtl",
+  placeholder: "editor-placeholder",
   paragraph: "editor-paragraph",
   quote: "editor-quote",
   heading: {
-    h1: "text-2xl font-bold",
-    h2: "text-xl font-bold",
-    h3: "text-lg font-bold",
-    h4: "text-base font-bold",
-    h5: "text-sm font-bold",
-    h6: "text-xs font-bold",
+    h1: "editor-heading-h1",
+    h2: "editor-heading-h2",
+    h3: "editor-heading-h3",
+    h4: "editor-heading-h4",
+    h5: "editor-heading-h5"
   },
   list: {
     nested: {
-      listitem: "editor-nested-listitem",
+      listitem: "editor-nested-listitem"
     },
     ol: "editor-list-ol",
     ul: "editor-list-ul",
-    listitem: "editor-listItem",
-    listitemChecked: "editor-listItemChecked",
-    listitemUnchecked: "editor-listItemUnchecked",
+    listitem: "editor-listitem"
   },
-  hashtag: "editor-hashtag",
   image: "editor-image",
   link: "editor-link",
   text: {
-    bold: "font-bold",
-    code: "editor-textCode",
-    italic: "italic",
-    strikethrough: "editor-textStrikethrough",
-    subscript: "editor-textSubscript",
-    superscript: "editor-textSuperscript",
-    underline: "underline",
-    underlineStrikethrough: "editor-textUnderlineStrikethrough",
+    bold: "editor-text-bold",
+    italic: "editor-text-italic",
+    overflowed: "editor-text-overflowed",
+    hashtag: "editor-text-hashtag",
+    underline: "editor-text-underline",
+    strikethrough: "editor-text-strikethrough",
+    underlineStrikethrough: "editor-text-underlineStrikethrough",
+    code: "editor-text-code"
   },
   code: "editor-code",
   codeHighlight: {
@@ -65,6 +62,8 @@ export const editorTheme = {
     symbol: "editor-tokenProperty",
     tag: "editor-tokenProperty",
     url: "editor-tokenOperator",
-    variable: "editor-tokenVariable",
-  },
+    variable: "editor-tokenVariable"
+  }
 };
+
+export default exampleTheme;
