@@ -39,12 +39,14 @@ import { getSelectedNode } from "../../utils/getSelectedNode";
 import { useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import FloatingLinkEditor from "../floatingLinkEditor/FloatingLinkEditor";
+import useModal from "../../hook/useModal";
+import { InsertImageDialog } from "../imagePlugin/ImagePlugin";
 
 const LowPriority = 1;
 
 export default function ToolBar() {
   const [editor] = useLexicalComposerContext();
-  // const [modal, showModal] = useModal();
+  const [modal, showModal] = useModal();
   const [blockType, setBlockType] = useState("paragraph");
   const [selectedElementKey, setSelectedElementKey] = useState(null);
   // const [isRTL, setIsRTL] = useState(false);
@@ -263,6 +265,10 @@ export default function ToolBar() {
       editor.dispatchCommand(REDO_COMMAND, undefined);
     } else if (event === eventTypes.formatInsertLink) {
       insertLink();
+    } else if (event === eventTypes.insertImage) {
+      showModal("Upload gambar", (onClose) => (
+        <InsertImageDialog activeEditor={editor} onClose={onClose} />
+      ));
     }
   };
 
@@ -275,6 +281,7 @@ export default function ToolBar() {
       ))}
       {isLink &&
         createPortal(<FloatingLinkEditor editor={editor} />, document.body)}
+      {modal}
     </div>
   );
 }

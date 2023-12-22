@@ -17,6 +17,9 @@ import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { theme } from "./theme/theme";
 import ToolBar from "./plugins/Toolbar/Toolbar";
 import CodeHighlightPlugin from "./plugins/codeHightLight/CodeHighLight";
+import { ImageNode } from "./node/imageNode/ImageNode";
+import ImagesPlugin from "./plugins/imagePlugin/ImagePlugin";
+import FloatingTextFormatToolbarPlugin from "./plugins/floatingTextFormatToolbarPlugin/FloatingTextFormatToolbarPlugin";
 
 function MyCustomAutoFocusPlugin() {
   const [editor] = useLexicalComposerContext();
@@ -71,6 +74,7 @@ export default function Editor() {
       TableRowNode,
       AutoLinkNode,
       LinkNode,
+      ImageNode,
     ],
   };
 
@@ -92,7 +96,9 @@ export default function Editor() {
         <MyCustomAutoFocusPlugin />
         <ListPlugin />
         <LinkPlugin />
+        <ImagesPlugin captionsEnabled={false} />
         <CodeHighlightPlugin />
+        <FloatingTextFormatToolbarPlugin />
         <HistoryPlugin />
         <OnChangePlugin onChange={onChange} />
       </div>

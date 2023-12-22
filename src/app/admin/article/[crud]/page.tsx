@@ -78,6 +78,7 @@ export default function Crud({ params }: { params: { crud: string } }) {
             <input
               className="bg-transparent w-1/2 text-sm focus:outline-none p-2 border border-neutral-900/30 focus:border-neutral-900/50"
               type="file"
+              accept="image/*"
             />
           </div>
           <Editor />
