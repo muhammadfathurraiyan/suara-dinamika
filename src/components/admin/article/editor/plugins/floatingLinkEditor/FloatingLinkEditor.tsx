@@ -27,25 +27,17 @@ import { sanitizeUrl } from "../../utils/sanitizeUrl";
 import Link from "next/link";
 import { PiCheck, PiPencilSimpleLine, PiTrash, PiX } from "react-icons/pi";
 
-function FloatingLinkEditor({
+export default function FloatingLinkEditor({
   editor,
-  isLink,
-  setIsLink,
   anchorElem,
-  isLinkEditMode,
-  setIsLinkEditMode,
 }: {
   editor: LexicalEditor;
-  isLink: boolean;
-  setIsLink: Dispatch<boolean>;
   anchorElem: HTMLElement;
-  isLinkEditMode: boolean;
-  setIsLinkEditMode: Dispatch<boolean>;
 }): JSX.Element {
   const editorRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [linkUrl, setLinkUrl] = useState("");
-  const [editedLinkUrl, setEditedLinkUrl] = useState("https://");
+  const [isEditMode, setEditMode] = useState(false);
   const [lastSelection, setLastSelection] = useState<BaseSelection | null>(
     null
   );
@@ -53,18 +45,17 @@ function FloatingLinkEditor({
   const updateLinkEditor = useCallback(() => {
     const selection = $getSelection();
     if ($isRangeSelection(selection)) {
-      const node = getSelectedNode(selection);
-      const linkParent = $findMatchingParent(node, $isLinkNode);
-
-      if (linkParent) {
-        setLinkUrl(linkParent.getURL());
-      } else if ($isLinkNode(node)) {
-        setLinkUrl(node.getURL());
-      } else {
-        setLinkUrl("");
-      }
-      if (isLinkEditMode) {
-        setEditedLinkUrl(linkUrl);
+      // const node = getSelectedNode(selection);
+      if ($isRangeSelection(selection)) {
+        const node = getSelectedNode(selection);
+        const parent = node.getParent();
+        if ($isLinkNode(parent)) {
+          setLinkUrl(parent.getURL());
+        } else if ($isLinkNode(node)) {
+          setLinkUrl(node.getURL());
+        } else {
+          setLinkUrl("");
+        }
       }
     }
     const editorElem = editorRef.current;
@@ -81,8 +72,8 @@ function FloatingLinkEditor({
       selection !== null &&
       nativeSelection !== null &&
       rootElement !== null &&
-      rootElement.contains(nativeSelection.anchorNode) &&
-      editor.isEditable()
+      rootElement.contains(nativeSelection.anchorNode) //&&
+      // editor.isEditable()
     ) {
       const domRect: DOMRect | undefined =
         nativeSelection.focusNode?.parentElement?.getBoundingClientRect();
@@ -96,36 +87,12 @@ function FloatingLinkEditor({
         setFloatingElemPositionForLinkEditor(null, editorElem, anchorElem);
       }
       setLastSelection(null);
-      setIsLinkEditMode(false);
+      setEditMode(false);
       setLinkUrl("");
     }
 
     return true;
-  }, [anchorElem, editor, setIsLinkEditMode, isLinkEditMode, linkUrl]);
-
-  useEffect(() => {
-    const scrollerElem = anchorElem.parentElement;
-
-    const update = () => {
-      editor.getEditorState().read(() => {
-        updateLinkEditor();
-      });
-    };
-
-    window.addEventListener("resize", update);
-
-    if (scrollerElem) {
-      scrollerElem.addEventListener("scroll", update);
-    }
-
-    return () => {
-      window.removeEventListener("resize", update);
-
-      if (scrollerElem) {
-        scrollerElem.removeEventListener("scroll", update);
-      }
-    };
-  }, [anchorElem.parentElement, editor, updateLinkEditor]);
+  }, [editor]); //anchorElem, setIsLinkEditMode, isLinkEditMode, linkUrl
 
   useEffect(() => {
     return mergeRegister(
@@ -142,20 +109,9 @@ function FloatingLinkEditor({
           return true;
         },
         COMMAND_PRIORITY_LOW
-      ),
-      editor.registerCommand(
-        KEY_ESCAPE_COMMAND,
-        () => {
-          if (isLink) {
-            setIsLink(false);
-            return true;
-          }
-          return false;
-        },
-        COMMAND_PRIORITY_HIGH
       )
     );
-  }, [editor, updateLinkEditor, setIsLink, isLink]);
+  }, [editor, updateLinkEditor]);
 
   useEffect(() => {
     editor.getEditorState().read(() => {
@@ -164,76 +120,41 @@ function FloatingLinkEditor({
   }, [editor, updateLinkEditor]);
 
   useEffect(() => {
-    if (isLinkEditMode && inputRef.current) {
+    if (isEditMode && inputRef.current) {
       inputRef.current.focus();
     }
-  }, [isLinkEditMode, isLink]);
-
-  const monitorInputInteraction = (
-    event: React.KeyboardEvent<HTMLInputElement>
-  ) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      handleLinkSubmission();
-    } else if (event.key === "Escape") {
-      event.preventDefault();
-      setIsLinkEditMode(false);
-    }
-  };
-
-  const handleLinkSubmission = () => {
-    if (lastSelection !== null) {
-      if (linkUrl !== "") {
-        editor.dispatchCommand(TOGGLE_LINK_COMMAND, sanitizeUrl(editedLinkUrl));
-      }
-      setEditedLinkUrl("https://");
-      setIsLinkEditMode(false);
-    }
-  };
+  }, [isEditMode]);
 
   return (
     <div
       className="absolute rounded z-20 top-0 left-0 transition-opacity duration-300 -mt-2 max-w-[300px] w-full flex shadow-md bg-neutral-100"
       ref={editorRef}
     >
-      {!isLink ? null : isLinkEditMode ? (
-        <>
+      <div className="flex items-center w-full px-2">
+        {isEditMode ? (
           <input
             ref={inputRef}
-            className="link-input"
-            value={editedLinkUrl}
+            className="link-input w-full outline-none"
+            value={linkUrl}
             onChange={(event) => {
-              setEditedLinkUrl(event.target.value);
+              setLinkUrl(event.target.value);
             }}
             onKeyDown={(event) => {
-              monitorInputInteraction(event);
+              if (event.key === "Enter") {
+                event.preventDefault();
+                if (lastSelection !== null) {
+                  if (linkUrl !== "") {
+                    editor.dispatchCommand(TOGGLE_LINK_COMMAND, linkUrl);
+                  }
+                  setEditMode(false);
+                }
+              } else if (event.key === "Escape") {
+                event.preventDefault();
+                setEditMode(false);
+              }
             }}
           />
-          <div className="flex items-center w-1/5">
-            <div
-              className="p-2 bg-neutral-900 hover:bg-neutral-800 duration-300 text-neutral-100 text-xl"
-              role="button"
-              tabIndex={0}
-              onMouseDown={(event) => event.preventDefault()}
-              onClick={() => {
-                setIsLinkEditMode(false);
-              }}
-            >
-              <PiX />
-            </div>
-            <div
-              className="p-2 bg-neutral-900 hover:bg-neutral-800 duration-300 text-neutral-100 text-xl"
-              role="button"
-              tabIndex={0}
-              onMouseDown={(event) => event.preventDefault()}
-              onClick={handleLinkSubmission}
-            >
-              <PiCheck />
-            </div>
-          </div>
-        </>
-      ) : (
-        <div className="flex items-center w-full">
+        ) : (
           <Link
             className="w-full"
             href={sanitizeUrl(linkUrl)}
@@ -242,167 +163,10 @@ function FloatingLinkEditor({
           >
             {linkUrl}
           </Link>
-          <div className="flex items-center w-1/5">
-            <div
-              className="p-2 bg-neutral-900 hover:bg-neutral-800 duration-300 text-neutral-100 text-xl"
-              role="button"
-              tabIndex={0}
-              onMouseDown={(event) => event.preventDefault()}
-              onClick={() => {
-                setEditedLinkUrl(linkUrl);
-                setIsLinkEditMode(true);
-              }}
-            >
-              <PiPencilSimpleLine />
-            </div>
-            <div
-              className="p-2 bg-neutral-900 hover:bg-neutral-800 duration-300 text-neutral-100 text-xl"
-              role="button"
-              tabIndex={0}
-              onMouseDown={(event) => event.preventDefault()}
-              onClick={() => {
-                editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
-              }}
-            >
-              <PiTrash />
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function useFloatingLinkEditorToolbar(
-  editor: LexicalEditor,
-  anchorElem: HTMLElement,
-  isLinkEditMode: boolean,
-  setIsLinkEditMode: Dispatch<boolean>
-): JSX.Element | null {
-  const [activeEditor, setActiveEditor] = useState(editor);
-  const [isLink, setIsLink] = useState(false);
-
-  useEffect(() => {
-    function updateToolbar() {
-      const selection = $getSelection();
-      if ($isRangeSelection(selection)) {
-        const node = getSelectedNode(selection);
-        const linkParent = $findMatchingParent(node, $isLinkNode);
-        const autoLinkParent = $findMatchingParent(node, $isAutoLinkNode);
-        // We don't want this menu to open for auto links.
-        if (linkParent !== null && autoLinkParent === null) {
-          setIsLink(true);
-        } else {
-          setIsLink(false);
-        }
-      }
-    }
-    return mergeRegister(
-      editor.registerUpdateListener(({ editorState }) => {
-        editorState.read(() => {
-          updateToolbar();
-        });
-      }),
-      editor.registerCommand(
-        SELECTION_CHANGE_COMMAND,
-        (_payload, newEditor) => {
-          updateToolbar();
-          setActiveEditor(newEditor);
-          return false;
-        },
-        COMMAND_PRIORITY_CRITICAL
-      ),
-      editor.registerCommand(
-        CLICK_COMMAND,
-        (payload) => {
-          const selection = $getSelection();
-          if ($isRangeSelection(selection)) {
-            const node = getSelectedNode(selection);
-            const linkNode = $findMatchingParent(node, $isLinkNode);
-            if ($isLinkNode(linkNode) && (payload.metaKey || payload.ctrlKey)) {
-              window.open(linkNode.getURL(), "_blank");
-              return true;
-            }
-          }
-          return false;
-        },
-        COMMAND_PRIORITY_LOW
-      )
-    );
-  }, [editor]);
-
-  return createPortal(
-    <FloatingLinkEditor
-      editor={activeEditor}
-      isLink={isLink}
-      anchorElem={anchorElem}
-      setIsLink={setIsLink}
-      isLinkEditMode={isLinkEditMode}
-      setIsLinkEditMode={setIsLinkEditMode}
-    />,
-    anchorElem
-  );
-}
-
-export default function FloatingLinkEditorPlugin({
-  anchorElem = document.body,
-  isLinkEditMode,
-  setIsLinkEditMode,
-}: {
-  anchorElem?: HTMLElement;
-  isLinkEditMode: boolean;
-  setIsLinkEditMode: Dispatch<boolean>;
-}): JSX.Element | null {
-  const [editor] = useLexicalComposerContext();
-  return useFloatingLinkEditorToolbar(
-    editor,
-    anchorElem,
-    isLinkEditMode,
-    setIsLinkEditMode
-  );
-}
-
-{
-  /* <div
-      className="absolute rounded z-20 top-0 left-0 transition-opacity duration-300 -mt-2 max-w-[300px] w-full flex shadow-md bg-neutral-100"
-      ref={editorRef}
-    >
-      <div className="w-full flex items-center justify-between border border-neutral-900/30">
-        <div className="mx-2 w-full">
-          {isEditMode ? (
-            <input
-              className="w-full underline relative outline-none"
-              ref={inputRef}
-              value={linkUrl}
-              onChange={(event) => {
-                setLinkUrl(event.target.value);
-              }}
-              onKeyDown={(event) => {
-                if (event.key === "Enter") {
-                  event.preventDefault();
-                  if (lastSelection !== null) {
-                    if (linkUrl !== "") {
-                      editor.dispatchCommand(TOGGLE_LINK_COMMAND, linkUrl);
-                    }
-                    setEditMode(false);
-                  }
-                } else if (event.key === "Escape") {
-                  event.preventDefault();
-                  setEditMode(false);
-                }
-              }}
-            />
-          ) : (
-            <div className="block w-full text-blue-700 relative">
-              <Link href={linkUrl} target="_blank">
-                {linkUrl}
-              </Link>
-            </div>
-          )}
-        </div>
-        <div>
+        )}
+        <div className="flex items-center">
           <div
-            className="w-full p-2 bg-neutral-900 text-neutral-100 text-xl"
+            className="p-2 bg-neutral-900 hover:bg-neutral-900/90 duration-300 text-neutral-100 text-xl"
             role="button"
             tabIndex={0}
             onMouseDown={(event) => event.preventDefault()}
@@ -410,9 +174,24 @@ export default function FloatingLinkEditorPlugin({
               setEditMode(!isEditMode);
             }}
           >
-            {isEditMode ? <PiCheck /> : <PiPencilSimpleLine />}
+            {isEditMode ? (
+              <PiCheck
+                onClick={(event: React.MouseEvent) => {
+                  event.preventDefault();
+                  if (lastSelection !== null) {
+                    if (linkUrl !== "") {
+                      editor.dispatchCommand(TOGGLE_LINK_COMMAND, linkUrl);
+                    }
+                    setEditMode(false);
+                  }
+                }}
+              />
+            ) : (
+              <PiPencilSimpleLine />
+            )}
           </div>
         </div>
       </div>
-    </div> */
+    </div>
+  );
 }

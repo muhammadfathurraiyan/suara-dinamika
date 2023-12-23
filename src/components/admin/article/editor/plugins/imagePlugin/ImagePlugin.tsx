@@ -1,10 +1,4 @@
-/**
- * Copyright (c) Meta Platforms, Inc. and affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
+"use client";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { $wrapNodeInElement, mergeRegister } from "@lexical/utils";
 import {
@@ -57,9 +51,12 @@ export function InsertImageUriDialogBody({
   return (
     <>
       <div className="flex flex-col w-full mb-2">
-        <label className="font-semibold text-sm">Link</label>
+        <label htmlFor="link" className="font-semibold text-sm">
+          Link
+        </label>
         <input
           type="text"
+          name="link"
           className="bg-transparent w-full focus:outline-none p-2 border border-neutral-900/30 focus:border-2 focus:border-neutral-900/50"
           placeholder="contoh. https://source.unsplash.com/random"
           value={src}
@@ -70,9 +67,12 @@ export function InsertImageUriDialogBody({
         />
       </div>
       <div className="flex flex-col w-full mb-2">
-        <label className="font-semibold text-sm">Teks alternative</label>
+        <label htmlFor="teksalt" className="font-semibold text-sm">
+          Teks alternative
+        </label>
         <input
           type="text"
+          name="teksalt"
           className="bg-transparent w-full focus:outline-none p-2 border border-neutral-900/30 focus:border-2 focus:border-neutral-900/50"
           placeholder="Random unsplash image"
           value={altText}
@@ -122,19 +122,25 @@ export function InsertImageUploadedDialogBody({
   return (
     <>
       <div className="flex flex-col w-full mb-2">
-        <label className="font-semibold text-sm">Pilih gambar</label>
+        <label htmlFor="file" className="font-semibold text-sm">
+          Pilih gambar
+        </label>
         <input
           type="file"
           accept="image/*"
+          name="file"
           className="bg-transparent w-full text-sm focus:outline-none p-2 border border-neutral-900/30 focus:border-neutral-900/50"
           onChange={(e) => loadImage(e.target.files)}
           data-test-id="image-modal-file-upload"
         />
       </div>
       <div className="flex flex-col w-full mb-2">
-        <label className="font-semibold text-sm">Teks alternative</label>
+        <label htmlFor="alt" className="font-semibold text-sm">
+          Teks alternative
+        </label>
         <input
           type="text"
+          name="alt"
           className="bg-transparent w-full focus:outline-none p-2 border border-neutral-900/30 focus:border-2 focus:border-neutral-900/50"
           placeholder="Teks alternative"
           value={altText}
@@ -265,8 +271,11 @@ export default function ImagesPlugin({
 
 const TRANSPARENT_IMAGE =
   "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
-const img = document.createElement("img");
-img.src = TRANSPARENT_IMAGE;
+let img: HTMLImageElement;
+if (typeof document !== "undefined") {
+  img = document.createElement("img");
+  img.src = TRANSPARENT_IMAGE;
+}
 
 function onDragStart(event: DragEvent): boolean {
   const node = getImageNodeInSelection();

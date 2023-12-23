@@ -27,31 +27,37 @@ export default function Crud({ params }: { params: { crud: string } }) {
         </p>
         <form className="flex flex-col gap-4 w-full" action="">
           <div className="flex flex-col">
-            <label className="font-semibold text-sm" htmlFor="title">
+            <label className="font-semibold text-sm">
               Judul
             </label>
             <input
               className="bg-transparent w-1/2 focus:outline-none p-2 border border-neutral-900/30 focus:border-2 focus:border-neutral-900/50"
               type="text"
+              name="judul"
+              id="title"
               placeholder="Judul"
             />
           </div>
           <div className="flex flex-col">
-            <label className="font-semibold text-sm" htmlFor="slug">
+            <label className="font-semibold text-sm">
               Slug
             </label>
             <input
               className="bg-transparent w-1/2 focus:outline-none p-2 border border-neutral-900/30 focus:border-2 focus:border-neutral-900/50"
               type="text"
+              id="slugs"
+              name="slug"
               placeholder="Slug"
             />
           </div>
           <div className="flex flex-col">
-            <label className="font-semibold text-sm" htmlFor="category">
+            <label className="font-semibold text-sm">
               Kategori
             </label>
             <select
               required
+              name="kategori"
+              id="select"
               value={selectedOption}
               onChange={(e) => setSelectedOption(e.target.value)}
               className={`bg-transparent w-1/2 ${
@@ -72,10 +78,12 @@ export default function Crud({ params }: { params: { crud: string } }) {
             </select>
           </div>
           <div className="flex flex-col">
-            <label className="font-semibold text-sm" htmlFor="image">
-              Foto Sampul
+            <label className="font-semibold text-sm">
+              Gambar sampul
             </label>
             <input
+              id="img"
+              name="foto"
               className="bg-transparent w-1/2 text-sm focus:outline-none p-2 border border-neutral-900/30 focus:border-neutral-900/50"
               type="file"
               accept="image/*"

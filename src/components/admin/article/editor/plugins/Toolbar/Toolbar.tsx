@@ -280,7 +280,10 @@ export default function ToolBar() {
         </div>
       ))}
       {isLink &&
-        createPortal(<FloatingLinkEditor editor={editor} />, document.body)}
+        createPortal(
+          <FloatingLinkEditor editor={editor} anchorElem={document.body} />,
+          document.body
+        )}
       {modal}
     </div>
   );

@@ -31,7 +31,7 @@ export function setFloatingElemPositionForLinkEditor(
     left = editorScrollerRect.right - floatingElemRect.width - horizontalOffset;
   }
 
-  top -= anchorElementRect.top - 80;
+  top -= anchorElementRect.top - 3;
   left -= anchorElementRect.left + 40;
 
   floatingElem.style.opacity = '1';
