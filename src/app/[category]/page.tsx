@@ -1,11 +1,17 @@
 import Link from "next/link";
 
-export default function Category({ params }: { params: { category: string } }) {
+export const revalidate = 0;
+
+export default async function Category({
+  params: { category },
+}: {
+  params: { category: string };
+}) {
   return (
     <section className="px-36 max-xl:px-12 max-md:px-4 py-8 flex flex-col gap-2">
       <div className="max-md:mt-40">
         <h1 className="font-semibold text-xl p-2 bg-neutral-900 text-neutral-100 w-fit uppercase">
-          {params.category}
+          {category}
         </h1>
         <div className="h-1 w-full bg-neutral-900" />
       </div>

@@ -6,7 +6,9 @@ import Teknologi from "@/components/home/Teknologi";
 import Opini from "@/components/home/Opini";
 import Sejarah from "@/components/home/Sejarah";
 
-export default function Home() {
+export const revalidate = 0;
+
+export default async function Home() {
   return (
     <>
       <Terbaru />

@@ -27,6 +27,7 @@ export default function Account() {
               className="bg-transparent focus:outline-none p-2 border border-neutral-900/30 w-full focus:border-2 focus:border-neutral-900/50"
               type="text"
               placeholder="Nama"
+              name="name"
             />
             <div>
               <label className="font-semibold" htmlFor="image">
