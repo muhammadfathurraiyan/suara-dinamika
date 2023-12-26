@@ -1,35 +1,14 @@
-// "use client";
-import signUpAction from "@/actions/auth/signUpAction";
-import { SignInSchema } from "@/libs/zodtypes";
+import UserForm from "@/components/admin/user/UserForm";
+import { readUserSession } from "@/libs/action";
 import Link from "next/link";
-// import { useState } from "react";
+import { redirect } from "next/navigation";
 import { PiArrowLeftBold } from "react-icons/pi";
 
-export default function TambahUser() {
-  // const [errors, setError] = useState("");
-  let errorM: string;
-  const signUpActionClient = async (data: FormData) => {
-    "use server";
-    const newSignUp = {
-      email: data.get("email"),
-      password: data.get("password"),
-    };
-
-    // clientside validate
-    const result = SignInSchema.safeParse(newSignUp);
-    if (!result.success) {
-      let errorMessage = "";
-      result.error.issues.forEach((issue) => {
-        errorMessage = errorMessage + issue.message;
-      });
-      return;
-    }
-    const signUpdData = await signUpAction(result.data);
-    const { error } = JSON.parse(signUpdData);
-    if (error?.message) {
-      return <p>error masbro</p>;
-    }
-  };
+export default async function TambahUser() {
+  const { data: userSession } = await readUserSession();
+  if (userSession.session?.user.user_metadata.role !== "admin") {
+    return redirect("/admin");
+  }
   return (
     <div className="relative px-4 py-12 flex flex-col gap-12">
       <Link
@@ -45,42 +24,7 @@ export default function TambahUser() {
       </div>
       <div className="flex flex-col gap-1">
         <p className="text-xl font-bold">Form tambah user:</p>
-        <form className="flex flex-col gap-7 w-1/3" action={signUpActionClient}>
-          <input
-            className="bg-transparent focus:outline-none p-2 border border-neutral-900/30 w-full focus:border-2 focus:border-neutral-900/50"
-            type="text"
-            placeholder="Nama"
-            name="name"
-          />
-          <input
-            className="bg-transparent focus:outline-none p-2 border border-neutral-900/30 w-full focus:border-2 focus:border-neutral-900/50"
-            type="text"
-            placeholder="Email"
-            name="email"
-          />
-          <input
-            className="bg-transparent focus:outline-none p-2 border border-neutral-900/30 w-full focus:border-2 focus:border-neutral-900/50"
-            type="password"
-            placeholder="Password"
-            name="password"
-          />
-          {/* <select className="bg-transparent focus:outline-none p-2 border border-neutral-900/30 w-full focus:border-2 focus:border-neutral-900/50">
-            <option value="1">Admin</option>
-            <option value="2">Super Admin</option>
-          </select>
-          <div>
-            <label className="font-semibold" htmlFor="image">
-              Foto
-            </label>
-            <input
-              className="bg-transparent text-sm focus:outline-none p-2 border border-neutral-900/30 w-full focus:border-neutral-900/50"
-              type="file"
-            />
-          </div> */}
-          <button className="py-2 px-8 bg-neutral-900 hover:bg-neutral-900/90 duration-300 uppercase w-fit text-neutral-50 ">
-            Tambah
-          </button>
-        </form>
+        <UserForm />
       </div>
     </div>
   );
