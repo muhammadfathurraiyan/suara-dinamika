@@ -1,6 +1,7 @@
-import readUserAction from "@/actions/admin/readUserAction";
+import readUserAction from "@/actions/user/readUserAction";
 import Link from "next/link";
-import { PiPencilLine, PiTrash } from "react-icons/pi";
+import { PiPencilLine } from "react-icons/pi";
+import DeleteButton from "./DeleteButton";
 
 export default async function UserTable() {
   const { data: permissions } = await readUserAction();
@@ -19,7 +20,10 @@ export default async function UserTable() {
         </thead>
         <tbody>
           {permissions?.map((permission, index) => (
-            <tr key={permission.user_id} className="border-b border-neutral-900">
+            <tr
+              key={permission.user_id}
+              className="border-b border-neutral-900"
+            >
               <td className="p-2 text-center">{++index}</td>
               <td className="p-2 text-center border-x border-neutral-900">
                 {permission.user?.name}
@@ -35,19 +39,13 @@ export default async function UserTable() {
               </td>
               <td className="p-2 text-center flex items-center justify-center gap-2">
                 <Link
-                  href="/"
+                  href={`/admin/user/edit-user?id=${permission.user_id}`}
                   aria-label="Update"
                   className="hover:text-green-600"
                 >
                   <PiPencilLine size={20} />
                 </Link>
-                <Link
-                  href="/"
-                  aria-label="Delete"
-                  className="hover:text-red-500"
-                >
-                  <PiTrash size={20} />
-                </Link>
+                <DeleteButton id={permission.user?.id!} />
               </td>
             </tr>
           ))}
