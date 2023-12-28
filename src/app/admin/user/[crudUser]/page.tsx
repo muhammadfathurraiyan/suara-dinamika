@@ -10,7 +10,7 @@ export default async function TambahUser({
   params: { crudUser: string };
 }) {
   const { data: userSession } = await readUserSession();
-  console.log(crudUser);
+  console.log(crudUser)
   if (userSession.session?.user.user_metadata.role !== "admin") {
     return redirect("/admin");
   } else {
