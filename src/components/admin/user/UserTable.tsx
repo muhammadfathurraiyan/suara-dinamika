@@ -39,7 +39,7 @@ export default async function UserTable() {
               </td>
               <td className="p-2 text-center flex items-center justify-center gap-2">
                 <Link
-                  href={`/admin/user/edit-user?id=${permission.user_id}`}
+                  href={`/admin/user/edit-user id=${permission.user_id}`}
                   aria-label="Update"
                   className="hover:text-green-600"
                 >

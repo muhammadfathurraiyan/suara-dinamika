@@ -4,13 +4,12 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { PiArrowLeftBold } from "react-icons/pi";
 
-export default async function TambahUser({
+export default async function CrudUser({
   params: { crudUser },
 }: {
   params: { crudUser: string };
 }) {
   const { data: userSession } = await readUserSession();
-  console.log(crudUser)
   if (userSession.session?.user.user_metadata.role !== "admin") {
     return redirect("/admin");
   } else {
@@ -26,13 +25,19 @@ export default async function TambahUser({
           </Link>
           <div>
             <h1 className="text-3xl font-black uppercase">
-              {crudUser.replace("-", " ")}
+              {crudUser === "tambah-user"
+                ? crudUser.replace("-", " ")
+                : crudUser.replace("-", " ").slice(0, 9)}
             </h1>
-            <p>Halaman {crudUser.replace("-", " ")}.</p>
+            <p>Halaman {crudUser === "tambah-user"
+                ? crudUser.replace("-", " ")
+                : crudUser.replace("-", " ").slice(0, 9)}.</p>
           </div>
           <div className="flex flex-col gap-1">
             <p className="text-xl font-bold">
-              Form {crudUser.replace("-", " ")}:
+              Form {crudUser === "tambah-user"
+                ? crudUser.replace("-", " ")
+                : crudUser.replace("-", " ").slice(0, 9)}:
             </p>
             <UserForm crudUser={crudUser} />
           </div>
