@@ -4,101 +4,145 @@ export type Json =
   | boolean
   | null
   | { [key: string]: Json | undefined }
-  | Json[]
+  | Json[];
 
 export interface Database {
   public: {
     Tables: {
+      article: {
+        Row: {
+          body: string;
+          created_at: string;
+          created_by: string;
+          id: string;
+          image: string;
+          slug: string;
+          status: boolean;
+          title: string;
+        };
+        Insert: {
+          body: string;
+          created_at?: string;
+          created_by?: string;
+          id?: string;
+          image: string;
+          slug: string;
+          status: boolean;
+          title: string;
+        };
+        Update: {
+          body?: string;
+          created_at?: string;
+          created_by?: string;
+          id?: string;
+          image?: string;
+          slug?: string;
+          status?: boolean;
+          title?: string;
+        };
+        Relationships: [];
+      };
       category: {
         Row: {
-          category: string
-          created_at: string
-          id: string
-        }
+          article_id: string;
+          category: string;
+          created_at: string;
+          id: string;
+        };
         Insert: {
-          category: string
-          created_at?: string
-          id?: string
-        }
+          article_id: string;
+          category: string;
+          created_at?: string;
+          id?: string;
+        };
         Update: {
-          category?: string
-          created_at?: string
-          id?: string
-        }
-        Relationships: []
-      }
-      permission: {
-        Row: {
-          created_at: string
-          id: string
-          role: string
-          user_id: string
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          role: string
-          user_id: string
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          role?: string
-          user_id?: string
-        }
+          article_id?: string;
+          category?: string;
+          created_at?: string;
+          id?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "permission_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "user"
-            referencedColumns: ["id"]
+            foreignKeyName: "category_article_id_fkey";
+            columns: ["article_id"];
+            isOneToOne: false;
+            referencedRelation: "article";
+            referencedColumns: ["id"];
           }
-        ]
-      }
+        ];
+      };
+      permission: {
+        Row: {
+          created_at: string;
+          id: string;
+          role: string;
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          id?: string;
+          role: string;
+          user_id: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          role?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "permission_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "user";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
       user: {
         Row: {
-          created_at: string
-          email: string
-          id: string
-          image: string
-          name: string
-        }
+          created_at: string;
+          email: string;
+          id: string;
+          image: string;
+          name: string;
+        };
         Insert: {
-          created_at?: string
-          email: string
-          id: string
-          image: string
-          name: string
-        }
+          created_at?: string;
+          email: string;
+          id: string;
+          image: string;
+          name: string;
+        };
         Update: {
-          created_at?: string
-          email?: string
-          id?: string
-          image?: string
-          name?: string
-        }
-        Relationships: []
-      }
-    }
+          created_at?: string;
+          email?: string;
+          id?: string;
+          image?: string;
+          name?: string;
+        };
+        Relationships: [];
+      };
+    };
     Views: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     Functions: {
       is_admin: {
         Args: {
-          user_id: string
-        }
-        Returns: boolean
-      }
-    }
+          props: string;
+        };
+        Returns: boolean;
+      };
+    };
     Enums: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     CompositeTypes: {
-      [_ in never]: never
-    }
-  }
+      [_ in never]: never;
+    };
+  };
 }
 
 export type Tables<
@@ -112,7 +156,7 @@ export type Tables<
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
       Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
-      Row: infer R
+      Row: infer R;
     }
     ? R
     : never
@@ -120,11 +164,11 @@ export type Tables<
       Database["public"]["Views"])
   ? (Database["public"]["Tables"] &
       Database["public"]["Views"])[PublicTableNameOrOptions] extends {
-      Row: infer R
+      Row: infer R;
     }
     ? R
     : never
-  : never
+  : never;
 
 export type TablesInsert<
   PublicTableNameOrOptions extends
@@ -135,17 +179,17 @@ export type TablesInsert<
     : never = never
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Insert: infer I
+      Insert: infer I;
     }
     ? I
     : never
   : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
   ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
-      Insert: infer I
+      Insert: infer I;
     }
     ? I
     : never
-  : never
+  : never;
 
 export type TablesUpdate<
   PublicTableNameOrOptions extends
@@ -156,17 +200,17 @@ export type TablesUpdate<
     : never = never
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Update: infer U
+      Update: infer U;
     }
     ? U
     : never
   : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
   ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
-      Update: infer U
+      Update: infer U;
     }
     ? U
     : never
-  : never
+  : never;
 
 export type Enums<
   PublicEnumNameOrOptions extends
@@ -179,4 +223,4 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : PublicEnumNameOrOptions extends keyof Database["public"]["Enums"]
   ? Database["public"]["Enums"][PublicEnumNameOrOptions]
-  : never
+  : never;

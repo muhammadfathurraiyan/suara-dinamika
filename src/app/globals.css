@@ -80,11 +80,11 @@
   }
 
   .editor-tokenOperator {
-   @apply text-red-600
+    @apply text-red-600;
   }
 
   .editor-tokenAttr {
-   @apply text-fuchsia-500;
+    @apply text-fuchsia-500;
   }
 
   .editor-tokenVariable {
@@ -92,7 +92,7 @@
   }
 
   .editor-tokenFunction {
-    @apply text-sky-500
+    @apply text-sky-500;
   }
 
   .editor-paragraph {

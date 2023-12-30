@@ -1,10 +1,8 @@
 "use client";
-import readUserProfileAction from "@/actions/global/readUserProfileAction";
 import createUserAction from "@/actions/user/createUserAction";
 import { CreateUserSchema } from "@/libs/types/zodtypes";
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import ImageInput from "./ImageInput";
+import ImageInput from "../global/ImageInput";
 
 export default function CreateUserForm() {
   const [error, setError] = useState("");

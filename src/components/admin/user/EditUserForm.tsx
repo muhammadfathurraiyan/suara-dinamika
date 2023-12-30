@@ -1,13 +1,17 @@
 import readUserProfileAction from "@/actions/global/readUserProfileAction";
 import React, { useState } from "react";
-import ImageInput from "./ImageInput";
+import ImageInput from "../global/ImageInput";
 import { CreateUserSchema, EditUserSchema } from "@/libs/types/zodtypes";
 import editUserAction from "@/actions/user/editUserAction";
+import { notFound } from "next/navigation";
 
 export default async function EditUserForm({ crudUser }: { crudUser: string }) {
   let error = "";
   const id = crudUser.slice(17);
   const { data } = await readUserProfileAction(id);
+  if (!data) {
+    return notFound();
+  }
   const profile = data![0];
 
   const clientEditUserAction = async (data: FormData) => {
@@ -20,8 +24,6 @@ export default async function EditUserForm({ crudUser }: { crudUser: string }) {
       role: data.get("role") as string,
       image: data.get("image") as string,
     };
-
-    const updatePassword = data.get("password") as string;
 
     // clientside validate
     const result = EditUserSchema.safeParse(newEditUser);
@@ -36,11 +38,7 @@ export default async function EditUserForm({ crudUser }: { crudUser: string }) {
       return;
     }
 
-    const createUserResult = await editUserAction(
-      id,
-      result.data,
-      updatePassword
-    );
+    const createUserResult = await editUserAction(id, result.data);
     if (createUserResult?.error) {
       error = createUserResult.error;
     }

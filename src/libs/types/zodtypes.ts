@@ -39,5 +39,20 @@ export const EditUserSchema = z.object({
     .min(1, { message: "email must be at least 1 character long. \n" })
     .max(30, { message: "email must be at most 30 characters long. \n" }),
   role: z.string(),
+  password: z.string().optional(),
   image: z.string(),
+});
+
+export const CreateArticleSchema = z.object({
+  title: z
+    .string()
+    .min(1, { message: "title must be at least 1 character long. \n" }),
+  slug: z.string(),
+  body: z
+    .string()
+    .min(1, { message: "body must be at least 1 character long. \n" }),
+  category: z.string(),
+  tag: z.string().optional(),
+  image: z.string(),
+  status: z.boolean()
 });

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { $getRoot, $getSelection, EditorState } from "lexical";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
@@ -79,29 +79,32 @@ export default function Editor() {
   };
 
   return (
-    <LexicalComposer initialConfig={initialConfig}>
-      <div className="relative">
-        <ToolBar />
-        <RichTextPlugin
-          contentEditable={
-            <ContentEditable className="min-h-[200px] w-full p-2 relative outline-none border border-neutral-900/30" />
-          }
-          placeholder={
-            <div className="absolute top-9 left-0 p-2 text-neutral-900/40 font-semibold">
-              Tulis article...
-            </div>
-          }
-          ErrorBoundary={LexicalErrorBoundary}
-        />
-        <MyCustomAutoFocusPlugin />
-        <ListPlugin />
-        <LinkPlugin />
-        <ImagesPlugin captionsEnabled={false} />
-        <CodeHighlightPlugin />
-        <FloatingTextFormatToolbarPlugin />
-        <HistoryPlugin />
-        <OnChangePlugin onChange={onChange} />
-      </div>
-    </LexicalComposer>
+    <>
+      <input type="hidden" name="body" value={editorState} />
+      <LexicalComposer initialConfig={initialConfig}>
+        <div className="relative">
+          <ToolBar />
+          <RichTextPlugin
+            contentEditable={
+              <ContentEditable className="min-h-[200px] w-full p-2 relative outline-none border border-neutral-900/30" />
+            }
+            placeholder={
+              <div className="absolute top-9 left-0 p-2 text-neutral-900/40 font-semibold">
+                Tulis article...
+              </div>
+            }
+            ErrorBoundary={LexicalErrorBoundary}
+          />
+          <MyCustomAutoFocusPlugin />
+          <ListPlugin />
+          <LinkPlugin />
+          <ImagesPlugin captionsEnabled={false} />
+          <CodeHighlightPlugin />
+          <FloatingTextFormatToolbarPlugin />
+          <HistoryPlugin />
+          <OnChangePlugin onChange={onChange} />
+        </div>
+      </LexicalComposer>
+    </>
   );
 }

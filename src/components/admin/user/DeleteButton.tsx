@@ -33,7 +33,7 @@ const ConfirmDeleteModal = ({
           <PiX />
         </div>
         <form action={deleteUserClientAction}>
-          <button className="py-2 px-8 bg-red-700 hover:bg-red-900/90 duration-300 uppercase w-fit text-neutral-50 ">
+          <button className="py-2 px-8 bg-red-700 hover:bg-red-900/90 duration-300 uppercase w-fit text-neutral-50">
             Hapus
           </button>
         </form>
@@ -44,8 +44,6 @@ const ConfirmDeleteModal = ({
 
 export default function DeleteButton({ id }: { id: string }) {
   const [modal, setModal] = useState(false);
-
-  console.log(modal);
   return (
     <>
       <div

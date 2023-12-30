@@ -3,6 +3,8 @@ import { Noto_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/global/Header";
 import Footer from "@/components/global/Footer";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 const notoSans = Noto_Sans({
   subsets: ["latin"],
@@ -23,7 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${notoSans.className} text-neutral-900 bg-neutral-100`}>
         <Header />
-        {children}
+        <Suspense fallback={<Loading />}>{children}</Suspense>
         <Footer />
       </body>
     </html>

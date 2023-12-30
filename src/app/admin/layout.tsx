@@ -1,6 +1,8 @@
 import Sidebar from "@/components/admin/global/Sidebar";
 import { readUserSession } from "@/libs/action";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
+import Loading from "../loading";
 
 export default async function AdminLayout({
   children,
@@ -18,7 +20,7 @@ export default async function AdminLayout({
         id="admin-layout"
         className="absolute right-0 inset-y-0 w-4/5 overflow-auto"
       >
-        {children}
+        <Suspense fallback={<Loading />}>{children}</Suspense>
       </div>
     </section>
   );

@@ -4,11 +4,7 @@ import { createSupabaseAdmin } from "@/libs/supabase";
 import { EditUserSchema } from "@/libs/types/zodtypes";
 import { redirect } from "next/navigation";
 
-export default async function editUserAction(
-  id: string,
-  data: unknown,
-  updatePassword: string
-) {
+export default async function editUserAction(id: string, data: unknown) {
   const { data: userSession } = await readUserSession();
   if (userSession.session?.user.user_metadata.role !== "admin") {
     return { error: "kamu bukan admin" };
@@ -26,10 +22,13 @@ export default async function editUserAction(
     return { error: errorMessage };
   }
 
-  let updateAdmin: any = { email: result.data.email };
+  let updateAdmin: {
+    email: string;
+    password: string | undefined;
+  } = { email: result.data.email, password: undefined };
 
-  if (updatePassword) {
-    updateAdmin["password"] = updatePassword;
+  if (result.data.password) {
+    updateAdmin["password"] = result.data.password;
   }
 
   // update account
