@@ -1,7 +1,7 @@
 import readUserAction from "@/actions/user/readUserAction";
 import Link from "next/link";
 import { PiPencilLine } from "react-icons/pi";
-import DeleteButton from "./DeleteButton";
+import DeleteButton from "../global/DeleteButton";
 
 export default async function UserTable() {
   const { data: permissions } = await readUserAction();
@@ -45,7 +45,7 @@ export default async function UserTable() {
                 >
                   <PiPencilLine size={20} />
                 </Link>
-                <DeleteButton id={permission.user?.id!} />
+                <DeleteButton text={permission.user?.name} id={permission.user?.id!} />
               </td>
             </tr>
           ))}

@@ -1,4 +1,5 @@
 "use client";
+import deleteArticleByIdAction from "@/actions/article/deleteArticleByIdAction";
 import deleteUserAction from "@/actions/user/deleteUserAction";
 import { Dispatch, SetStateAction, useState } from "react";
 import { PiTrash, PiWarningCircleThin, PiX } from "react-icons/pi";
@@ -6,16 +7,26 @@ import { PiTrash, PiWarningCircleThin, PiX } from "react-icons/pi";
 const ConfirmDeleteModal = ({
   id,
   setModal,
+  string,
 }: {
   id: string;
+  string: string | undefined;
   setModal: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const deleteUserClientAction = async () => {
-    const result = await deleteUserAction(id);
-    if (result?.error) {
-      alert(result.error);
+  const deleteClientAction = async () => {
+    if (string?.includes("article")) {
+      const result = await deleteArticleByIdAction(id);
+      if (result?.error) {
+        alert(result.error);
+      }
+      setModal(false);
+    } else {
+      const result = await deleteUserAction(id);
+      if (result?.error) {
+        alert(result.error);
+      }
+      setModal(false);
     }
-    setModal(false);
   };
   return (
     <div className="flex justify-center items-center fixed inset-x-0 inset-y-0 bg-neutral-900/50 shrink z-50 grow-0">
@@ -23,7 +34,7 @@ const ConfirmDeleteModal = ({
         <div className="flex flex-col gap-2 items-center justify-center">
           <h2 className="text-xl font-bold">Hapus</h2>
           <PiWarningCircleThin className="text-red-700" size={100} />
-          <p>Apakah anda yakin ingin menghapus akun ini?</p>
+          <p>Apakah anda yakin ingin menghapus {string}?</p>
         </div>
         <div
           className="absolute right-2 top-2 justify-center flex text-xl text-center cursor-pointer"
@@ -32,7 +43,7 @@ const ConfirmDeleteModal = ({
         >
           <PiX />
         </div>
-        <form action={deleteUserClientAction}>
+        <form action={deleteClientAction}>
           <button className="py-2 px-8 bg-red-700 hover:bg-red-900/90 duration-300 uppercase w-fit text-neutral-50">
             Hapus
           </button>
@@ -42,7 +53,13 @@ const ConfirmDeleteModal = ({
   );
 };
 
-export default function DeleteButton({ id }: { id: string }) {
+export default function DeleteButton({
+  text,
+  id,
+}: {
+  text: string | undefined;
+  id: string;
+}) {
   const [modal, setModal] = useState(false);
   return (
     <>
@@ -53,7 +70,9 @@ export default function DeleteButton({ id }: { id: string }) {
       >
         <PiTrash size={20} />
       </div>
-      {modal && <ConfirmDeleteModal id={id} setModal={setModal} />}
+      {modal && (
+        <ConfirmDeleteModal string={text} id={id} setModal={setModal} />
+      )}
     </>
   );
 }

@@ -4,7 +4,6 @@ import Editor from "../editor/Editor";
 import { CreateArticleSchema } from "@/libs/types/zodtypes";
 import createArticleAction from "@/actions/article/createArticleAction";
 import ImageInput from "../../global/ImageInput";
-import { redirect } from "next/navigation";
 
 export default function CreateArticleForm() {
   const [selectedOption, setSelectedOption] = useState("0");
