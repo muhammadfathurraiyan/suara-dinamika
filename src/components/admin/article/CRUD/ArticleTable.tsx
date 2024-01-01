@@ -35,7 +35,7 @@ export default async function ArticleTable({ id }: { id: string | undefined }) {
                 <PiEye size={20} />
               </Link>
               <Link
-                href="/"
+                href={`/admin/article/edit-article ${article.id}`}
                 aria-label="Update"
                 className="hover:text-green-600"
               >

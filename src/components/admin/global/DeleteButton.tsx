@@ -66,7 +66,7 @@ export default function DeleteButton({
       <div
         aria-label="Delete"
         onClick={() => setModal(true)}
-        className="hover:text-red-500"
+        className="hover:text-red-500 cursor-pointer"
       >
         <PiTrash size={20} />
       </div>
