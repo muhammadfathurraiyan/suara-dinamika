@@ -16,7 +16,7 @@ export default async function Article() {
       <div className="flex flex-col gap-2">
         <Link
           className="py-2 px-8 bg-neutral-900 hover:bg-neutral-900/90 duration-300 uppercase w-fit text-neutral-50"
-          href="/admin/article/buat-article"
+          href={`/admin/article/buat-article`}
         >
           Buat
         </Link>

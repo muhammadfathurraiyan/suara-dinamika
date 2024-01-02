@@ -1,5 +1,4 @@
 import ArticleForm from "@/components/admin/article/CRUD/ArticleForm";
-import CreateArticleForm from "@/components/admin/article/CRUD/CreateArticleForm";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PiArrowLeftBold } from "react-icons/pi";
@@ -9,7 +8,7 @@ export default function Crud({
 }: {
   params: { crud: string };
 }) {
-  if (crud === "buat-article" || crud.includes("edit-article")) {
+  if (crud.includes("buat-article") || crud.includes("edit-article")) {
     return (
       <div className="relative px-4 py-12 flex flex-col gap-12">
         <Link
@@ -25,14 +24,22 @@ export default function Crud({
               ? crud.replace("-", " ")
               : crud.replace("-", " ").slice(0, 12)}
           </h1>
-          <p>Halaman {crud === "buat-berita"
+          <p>
+            Halaman{" "}
+            {crud === "buat-berita"
               ? crud.replace("-", " ")
-              : crud.replace("-", " ").slice(0, 12)}.</p>
+              : crud.replace("-", " ").slice(0, 12)}
+            .
+          </p>
         </div>
         <div className="flex flex-col gap-4">
-          <p className="text-xl font-bold">Form {crud === "buat-berita"
+          <p className="text-xl font-bold">
+            Form{" "}
+            {crud === "buat-berita"
               ? crud.replace("-", " ")
-              : crud.replace("-", " ").slice(0, 12)}:</p>
+              : crud.replace("-", " ").slice(0, 12)}
+            :
+          </p>
           <ArticleForm crud={crud} />
         </div>
       </div>
