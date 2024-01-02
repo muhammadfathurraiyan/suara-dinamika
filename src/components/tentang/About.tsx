@@ -12,8 +12,8 @@ export default function About() {
       <p className="md:text-lg leading-loose text-neutral-900/70">
         Seperti namanya Suara Dinamika merupakan media literasi digital yang
         dikembangkan dengan tujuan untuk memberikan informasi-informasi yang
-        unik, terpercaya serta bermanfaat terus menerus dan memberikan
-        pengalaman membaca terbaik kepada pengguna.
+        unik, komunikatif, terpercaya serta bermanfaat terus menerus dan
+        memberikan pengalaman membaca terbaik kepada pengguna.
       </p>
       <p className="md:text-lg leading-loose text-neutral-900/70">
         Anda dapat mengisi{" "}
@@ -24,7 +24,8 @@ export default function About() {
           form dibawah
           <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-900/90 left-0 bottom-0" />
         </Link>{" "}
-        kami untuk proses{" "}
+        untuk proses{" "}
+        <span className="font-semibold text-neutral-900/90">kontak,</span>{" "}
         <span className="font-semibold text-neutral-900/90">advertise</span>{" "}
         atau{" "}
         <span className="font-semibold text-neutral-900/90">periklanan</span>.

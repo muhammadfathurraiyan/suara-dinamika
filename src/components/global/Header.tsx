@@ -68,7 +68,7 @@ export default function Header() {
             <h1 className="text-3xl font-bold">SUARA DINAMIKA</h1>
             <div className="flex items-center gap-1">
               <div className="h-[1px] w-12 bg-neutral-100" />
-              <p className="text-xs italic font-light">Unik & Terpercaya.</p>
+              <p className="text-xs italic font-light">Unik & Komunikatif.</p>
             </div>
           </Link>
           <div>
@@ -129,23 +129,23 @@ export default function Header() {
           TEKNOLOGI
           <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-900 left-0 bottom-0" />
         </Link>
-        <Link className="group relative max-md:hidden" href="/travel">
-          TRAVEL
+        <Link className="group relative max-md:hidden" href="/olahraga">
+          OLAHRAGA
           <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-900 left-0 bottom-0" />
         </Link>
         <div className="relative group max-md:hidden p-2 flex items-center">
           LAINYA <PiCaretDown className="group-hover:rotate-180 duration-300" />
           <div className="absolute z-20 invisible group-hover:visible opacity-0 group-hover:opacity-100 flex duration-300 bg-neutral-100 border border-neutral-900/30 flex-col gap-2 items-start left-0 top-10 px-2 py-4">
-            <Link className="relative group/link" href="/">
-              SEJARAH
+            <Link className="relative group/link" href="/sains">
+              SAINS
               <span className="absolute duration-300 h-[1px] w-0 group-hover/link:w-full bg-neutral-900 left-0 bottom-0" />
             </Link>
-            <Link className="relative group/link" href="/">
-              SENI
+            <Link className="relative group/link" href="/travel">
+            TRAVEL
               <span className="absolute duration-300 h-[1px] w-0 group-hover/link:w-full bg-neutral-900 left-0 bottom-0" />
             </Link>
-            <Link className="relative group/link" href="/">
-              TEKNOLOGI
+            <Link className="relative group/link" href="/sastra">
+              SASTRA
               <span className="absolute duration-300 h-[1px] w-0 group-hover/link:w-full bg-neutral-900 left-0 bottom-0" />
             </Link>
           </div>
@@ -162,35 +162,47 @@ export default function Header() {
           <h1 className="text-2xl font-bold">SUARA DINAMIKA</h1>
           <div className="flex items-center gap-1">
             <div className="h-[1px] w-12 bg-neutral-100" />
-            <p className="text-xs italic font-light">Unik & Terpercaya.</p>
+            <p className="text-xs italic font-light">Unik & Komunikatif.</p>
           </div>
         </div>
-        <Link className="group relative w-fit" href="/">
+        <Link className="group relative w-fit" href="/budaya">
           BUDAYA
           <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-100 left-0 bottom-0" />
         </Link>
-        <Link className="group relative w-fit" href="/">
+        <Link className="group relative w-fit" href="/edukasi">
           EDUKASI
           <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-100 left-0 bottom-0" />
         </Link>
-        <Link className="group relative w-fit" href="/">
+        <Link className="group relative w-fit" href="/lingkungan">
           LINGKUNGAN
           <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-100 left-0 bottom-0" />
         </Link>
-        <Link className="group relative w-fit" href="/">
+        <Link className="group relative w-fit" href="/opini">
           OPINI
           <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-100 left-0 bottom-0" />
         </Link>
-        <Link className="group relative w-fit" href="/">
+        <Link className="group relative w-fit" href="/sejarah">
           SEJARAH
           <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-100 left-0 bottom-0" />
         </Link>
-        <Link className="group relative w-fit" href="/">
+        <Link className="group relative w-fit" href="/seni">
           SENI
           <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-100 left-0 bottom-0" />
         </Link>
-        <Link className="group relative w-fit" href="/">
+        <Link className="group relative w-fit" href="/teknologi">
           TEKNOLOGI
+          <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-100 left-0 bottom-0" />
+        </Link>
+        <Link className="group relative w-fit" href="/sains">
+          SAINS
+          <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-100 left-0 bottom-0" />
+        </Link>
+        <Link className="group relative w-fit" href="/travel">
+          TRAVEL
+          <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-100 left-0 bottom-0" />
+        </Link>
+        <Link className="group relative w-fit" href="/sastra">
+          SASTRA
           <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-100 left-0 bottom-0" />
         </Link>
         <div

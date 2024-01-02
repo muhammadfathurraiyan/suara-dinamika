@@ -25,13 +25,21 @@ export default async function ArticleTable({ id }: { id: string | undefined }) {
             <td className="p-2 text-center border-x border-neutral-900 truncate max-w-xs">
               {article.title}
             </td>
-            <td className="p-2 text-center">{article.created_at}</td>
+            <td className="p-2 text-center">
+              {new Date(article.created_at).toDateString()}
+            </td>
             <td className="p-2 text-center border-x border-neutral-900">
               {article.category[0].category}
             </td>
-            <td className="p-2 text-center">{article.status}</td>
+            <td className="p-2 text-center">
+              {article.status === true ? "Public" : "Private"}
+            </td>
             <td className="p-2 border-l border-neutral-900 text-center flex items-center justify-center gap-2">
-              <Link href="/" aria-label="Read" className="hover:text-blue-500">
+              <Link
+                href={`/${article.category[0].category}/${article.slug}`}
+                aria-label="Read"
+                className="hover:text-blue-500"
+              >
                 <PiEye size={20} />
               </Link>
               <Link

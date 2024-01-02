@@ -1,9 +1,10 @@
 "use server";
+
 import { createSupabaseServerClient } from "@/libs/supabase";
 import { CreateArticleSchema } from "@/libs/types/zodtypes";
 import { redirect } from "next/navigation";
 
-export default async function createArticleAction(data: unknown) {
+export default async function editArticleAction(data: unknown, id: string) {
   const supabase = await createSupabaseServerClient();
   const result = CreateArticleSchema.safeParse(data);
 
@@ -16,26 +17,30 @@ export default async function createArticleAction(data: unknown) {
     return { error: errorMessage };
   }
 
-  console.log(result);
-
+  // update account
   const validResult = await supabase
     .from("article")
-    .insert({
+    .update({
       title: result.data.title,
       slug: result.data.slug,
-      body: result.data.body,
       image: result.data.image,
+      body: result.data.body,
       status: result.data.status,
     })
+    .eq("id", id)
     .select();
 
   if (validResult.error?.message) {
-    return { error: validResult.error?.message };
+    return { error: validResult.error.message };
   } else {
-    const categoryResult = await supabase.from("category").insert({
-      category: result.data.category,
-      article_id: validResult.data?.[0].id!,
-    });
+    // insert permission table
+    const categoryResult = await supabase
+      .from("category")
+      .update({
+        category: result.data.category,
+      })
+      .eq("article_id", validResult.data?.[0].id!);
+
     if (categoryResult.error?.message) {
       return { error: categoryResult.error.message };
     }

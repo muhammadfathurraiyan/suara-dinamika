@@ -8,7 +8,7 @@ export default function Beranda() {
         SUARA DINAMIKA
       </h1>
       <p className="md:text-lg md:w-2/3 leading-loose text-neutral-900/70">
-        Media literasi digital dengan informasi unik dan terpercaya.
+        Media literasi digital dengan informasi unik dan komunikatif.
       </p>
       <Link
         href="#tentang"
