@@ -61,7 +61,7 @@ export default async function EditArticleForm({ crud }: { crud: string }) {
       <div className="w-1/2">
         <ImageInput src={profile.image} />
       </div>
-      <Editor />
+      <Editor body={profile.body} />
       <button className="py-2 px-8 bg-neutral-900 hover:bg-neutral-900/90 duration-300 uppercase w-fit text-neutral-50 ">
         Edit
       </button>

@@ -1,9 +1,5 @@
 import Link from "next/link";
-import {
-  FaFacebookF,
-  FaTelegramPlane,
-  FaFacebookMessenger,
-} from "react-icons/fa";
+import { FaFacebookF, FaTelegramPlane } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { IoShareSocialSharp, IoLogoWhatsapp } from "react-icons/io5";
 
