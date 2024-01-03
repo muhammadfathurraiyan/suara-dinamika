@@ -48,8 +48,8 @@ function OnChangePlugin({
   }, [editor, onChange]);
 }
 
-export default function Editor({ body }: { body: string }) {
-  const [editorState, setEditorState] = useState<string>(body);
+export default function Editor({ body, from }: { body: string; from: string }) {
+  const [editorState, setEditorState] = useState<string>();
 
   function onChange(editorState: EditorState) {
     // Call toJSON on the EditorState object, which produces a serialization safe string
@@ -78,10 +78,33 @@ export default function Editor({ body }: { body: string }) {
     ],
   };
 
+  const initialEditConfig = {
+    namespace: "MyEditor",
+    editorState: body,
+    theme,
+    onError,
+    nodes: [
+      HeadingNode,
+      ListNode,
+      ListItemNode,
+      QuoteNode,
+      CodeNode,
+      CodeHighlightNode,
+      TableNode,
+      TableCellNode,
+      TableRowNode,
+      AutoLinkNode,
+      LinkNode,
+      ImageNode,
+    ],
+  };
+
   return (
     <>
       <input type="hidden" name="body" value={editorState} />
-      <LexicalComposer initialConfig={initialConfig}>
+      <LexicalComposer
+        initialConfig={from === "edit" ? initialEditConfig : initialConfig}
+      >
         <div className="relative">
           <ToolBar />
           <RichTextPlugin

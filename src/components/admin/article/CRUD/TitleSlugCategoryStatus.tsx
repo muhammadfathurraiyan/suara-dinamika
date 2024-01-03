@@ -70,8 +70,35 @@ export default function TitleSlugCategoryStatus({
           <option className="text-neutral-900" value="Budaya">
             Budaya
           </option>
+          <option className="text-neutral-900" value="Edukasi">
+            Edukasi
+          </option>
+          <option className="text-neutral-900" value="Lingkungan">
+            Lingkungan
+          </option>
+          <option className="text-neutral-900" value="Opini">
+            Opini
+          </option>
+          <option className="text-neutral-900" value="Sejarah">
+            Sejarah
+          </option>
+          <option className="text-neutral-900" value="Seni">
+            Seni
+          </option>
           <option className="text-neutral-900" value="Teknologi">
             Teknologi
+          </option>
+          <option className="text-neutral-900" value="Olahraga">
+            Olahraga
+          </option>
+          <option className="text-neutral-900" value="Sains">
+            Sains
+          </option>
+          <option className="text-neutral-900" value="Travel">
+            Travel
+          </option>
+          <option className="text-neutral-900" value="Sastra">
+            Sastra
           </option>
         </select>
       </div>

@@ -38,7 +38,6 @@ export default function CreateArticleForm() {
     // clientside validate
     const result = CreateArticleSchema.safeParse(newClient);
     if (!result.success) {
-      console.log(result.error);
       let errorMessage = "";
       result.error.issues.forEach((issue) => {
         errorMessage = issue.path + " " + errorMessage + issue.message;
@@ -98,11 +97,38 @@ export default function CreateArticleForm() {
           <option value="0" disabled hidden>
             Pilih Kategori
           </option>
-          <option className="text-neutral-900" value="1">
+          <option className="text-neutral-900" value="Budaya">
             Budaya
           </option>
-          <option className="text-neutral-900" value="2">
+          <option className="text-neutral-900" value="Edukasi">
+            Edukasi
+          </option>
+          <option className="text-neutral-900" value="Lingkungan">
+            Lingkungan
+          </option>
+          <option className="text-neutral-900" value="Opini">
+            Opini
+          </option>
+          <option className="text-neutral-900" value="Sejarah">
+            Sejarah
+          </option>
+          <option className="text-neutral-900" value="Seni">
+            Seni
+          </option>
+          <option className="text-neutral-900" value="Teknologi">
             Teknologi
+          </option>
+          <option className="text-neutral-900" value="Olahraga">
+            Olahraga
+          </option>
+          <option className="text-neutral-900" value="Sains">
+            Sains
+          </option>
+          <option className="text-neutral-900" value="Travel">
+            Travel
+          </option>
+          <option className="text-neutral-900" value="Sastra">
+            Sastra
           </option>
         </select>
       </div>
@@ -132,7 +158,7 @@ export default function CreateArticleForm() {
       <div className="w-1/2">
         <ImageInput src="" />
       </div>
-      <Editor />
+      <Editor body="" from="create" />
       <button className="py-2 px-8 bg-neutral-900 hover:bg-neutral-900/90 duration-300 uppercase w-fit text-neutral-50 ">
         Tambah
       </button>
