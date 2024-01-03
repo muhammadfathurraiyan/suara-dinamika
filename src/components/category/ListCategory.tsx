@@ -26,6 +26,7 @@ export default function ListCategory({
         {data?.map((data) => (
           <Link
             href={`/${data.category}/${data.article?.slug}`}
+            key={data.article?.id}
             className="flex flex-col items-start gap-2"
           >
             <div className="grid md:grid-cols-2 border border-neutral-900/30 max-md:grid-rows-2 w-full h-48 max-md:h-96 gap-2">
