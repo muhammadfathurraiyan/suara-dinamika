@@ -26,7 +26,7 @@ export default function TitleSlugCategoryStatus({
 
   const handleSlug = (e: ChangeEvent<HTMLInputElement>) => {
     let data = e.target.value;
-    setEditSlug(data.replaceAll(" ", "-"));
+    setEditSlug(data.replaceAll(" ", "-").toLowerCase());
   };
 
   const handleCategory = (e: ChangeEvent<HTMLSelectElement>) => {

@@ -44,7 +44,7 @@ export default function MainCategory({
             <h2 className="md:text-2xl font-medium text-neutral-100">
               {data![2].title}
             </h2>
-            <p className="p-2 bg-neutral-900 text-neutral-100 w-fit text-xs">
+            <p className="p-2 bg-neutral-900 uppercase text-neutral-100 w-fit text-xs">
               {data![2].category?.category}
             </p>
           </div>
@@ -64,7 +64,7 @@ export default function MainCategory({
             />
             <div className="absolute bottom-0 left-0 p-2 pt-3 flex flex-col gap-2 bg-gradient-to-t from-neutral-900/50 to-transparent">
               <h2 className="font-medium text-neutral-100">{data![1].title}</h2>
-              <p className="p-2 bg-neutral-900 text-neutral-100 w-fit text-xs">
+              <p className="p-2 bg-neutral-900 uppercase text-neutral-100 w-fit text-xs">
                 {data![1].category?.category}
               </p>
             </div>
@@ -83,7 +83,7 @@ export default function MainCategory({
             />
             <div className="absolute bottom-0 left-0 p-2 pt-3 flex flex-col gap-2 bg-gradient-to-t from-neutral-900/50 to-transparent">
               <h2 className="font-medium text-neutral-100">{data![0].title}</h2>
-              <p className="p-2 bg-neutral-900 text-neutral-100 w-fit text-xs">
+              <p className="p-2 bg-neutral-900 uppercase text-neutral-100 w-fit text-xs">
                 {data![0].category?.category}
               </p>
             </div>

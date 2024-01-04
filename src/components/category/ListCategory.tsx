@@ -49,7 +49,7 @@ export default function ListCategory({
                   <p className="text-xs">&#8226; 10 menit yang lalu</p>
                 </div>
                 <div className="flex items-center gap-2 flex-wrap">
-                  <p className="p-2 bg-neutral-900 text-neutral-100 w-fit text-xs">
+                  <p className="p-2 uppercase bg-neutral-900 text-neutral-100 w-fit text-xs">
                     {data.category?.category}
                   </p>
                 </div>

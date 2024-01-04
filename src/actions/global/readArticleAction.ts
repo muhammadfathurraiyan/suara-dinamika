@@ -12,5 +12,6 @@ export default async function readArticleAction(category: string) {
   return supabase
     .from("article")
     .select("*, category(*)")
-    .eq("category_id", categoryId.data![0].id);
+    .eq("category_id", categoryId.data![0].id)
+    .eq("status", true);
 }

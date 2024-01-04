@@ -24,7 +24,7 @@ export default function CreateArticleForm({
 
   const handleSlug = (e: ChangeEvent<HTMLInputElement>) => {
     let data = e.target.value;
-    setSlug(data.replaceAll(" ", "-"));
+    setSlug(data.replaceAll(" ", "-").toLowerCase());
   };
 
   const handleStatus = (e: ChangeEvent<HTMLSelectElement>) => {
