@@ -26,24 +26,13 @@ export default async function editArticleAction(data: unknown, id: string) {
       image: result.data.image,
       body: result.data.body,
       status: result.data.status,
+      category_id: result.data.category,
     })
     .eq("id", id)
     .select();
 
   if (validResult.error?.message) {
     return { error: validResult.error.message };
-  } else {
-    // insert permission table
-    const categoryResult = await supabase
-      .from("category")
-      .update({
-        category: result.data.category,
-      })
-      .eq("article_id", validResult.data?.[0].id!);
-
-    if (categoryResult.error?.message) {
-      return { error: categoryResult.error.message };
-    }
   }
 
   return redirect("/admin/article");

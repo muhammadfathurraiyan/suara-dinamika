@@ -5,8 +5,12 @@ import { createSupabaseServerClient } from "@/libs/supabase";
 export default async function readArticleAction(category: string) {
   noStore();
   const supabase = await createSupabaseServerClient();
-  return supabase
+  const categoryId = await supabase
     .from("category")
-    .select("category, article(*)")
+    .select("id")
     .eq("category", category);
+  return supabase
+    .from("article")
+    .select("*, category(*)")
+    .eq("category_id", categoryId.data![0].id);
 }

@@ -4,12 +4,20 @@ import { ChangeEvent, useState } from "react";
 export default function TitleSlugCategoryStatus({
   title,
   slug,
+  categories,
   category,
   status,
 }: {
   title: string;
   slug: string;
   category: string;
+  categories:
+    | {
+        category: string;
+        created_at: string;
+        id: string;
+      }[]
+    | null;
   status: string;
 }) {
   const [editSlug, setEditSlug] = useState(slug);
@@ -48,7 +56,7 @@ export default function TitleSlugCategoryStatus({
       <div className="flex flex-col">
         <label className="font-semibold text-sm">Slug</label>
         <input
-          className="bg-transparent cursor-not-allowed w-1/2 focus:outline-none p-2 border border-neutral-900/30 focus:border-2 focus:border-neutral-900/50"
+          className="bg-transparent lowercase cursor-not-allowed w-1/2 focus:outline-none p-2 border border-neutral-900/30 focus:border-2 focus:border-neutral-900/50"
           type="text"
           id="slugs"
           name="slug"
@@ -65,41 +73,17 @@ export default function TitleSlugCategoryStatus({
           id="select"
           value={editCategory}
           onChange={(e) => handleCategory(e)}
-          className={`bg-transparent w-1/2 focus:outline-none p-2 border border-neutral-900/30 focus:border-2 focus:border-neutral-900/50`}
+          className={`bg-transparent w-1/2 focus:outline-none capitalize p-2 border border-neutral-900/30 focus:border-2 focus:border-neutral-900/50`}
         >
-          <option className="text-neutral-900" value="Budaya">
-            Budaya
-          </option>
-          <option className="text-neutral-900" value="Edukasi">
-            Edukasi
-          </option>
-          <option className="text-neutral-900" value="Lingkungan">
-            Lingkungan
-          </option>
-          <option className="text-neutral-900" value="Opini">
-            Opini
-          </option>
-          <option className="text-neutral-900" value="Sejarah">
-            Sejarah
-          </option>
-          <option className="text-neutral-900" value="Seni">
-            Seni
-          </option>
-          <option className="text-neutral-900" value="Teknologi">
-            Teknologi
-          </option>
-          <option className="text-neutral-900" value="Olahraga">
-            Olahraga
-          </option>
-          <option className="text-neutral-900" value="Sains">
-            Sains
-          </option>
-          <option className="text-neutral-900" value="Travel">
-            Travel
-          </option>
-          <option className="text-neutral-900" value="Sastra">
-            Sastra
-          </option>
+          {categories?.map((category) => (
+            <option
+              key={category.id}
+              className="text-neutral-900 capitalize"
+              value={category.id}
+            >
+              {category.category}
+            </option>
+          ))}
         </select>
       </div>
       <div className="flex flex-col">

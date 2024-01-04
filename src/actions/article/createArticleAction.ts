@@ -16,29 +16,17 @@ export default async function createArticleAction(data: unknown) {
     return { error: errorMessage };
   }
 
-  console.log(result);
-
-  const validResult = await supabase
-    .from("article")
-    .insert({
-      title: result.data.title,
-      slug: result.data.slug,
-      body: result.data.body,
-      image: result.data.image,
-      status: result.data.status,
-    })
-    .select();
+  const validResult = await supabase.from("article").insert({
+    title: result.data.title,
+    slug: result.data.slug,
+    body: result.data.body,
+    image: result.data.image,
+    status: result.data.status,
+    category_id: result.data.category,
+  });
 
   if (validResult.error?.message) {
     return { error: validResult.error?.message };
-  } else {
-    const categoryResult = await supabase.from("category").insert({
-      category: result.data.category,
-      article_id: validResult.data?.[0].id!,
-    });
-    if (categoryResult.error?.message) {
-      return { error: categoryResult.error.message };
-    }
   }
 
   return redirect("/admin/article");

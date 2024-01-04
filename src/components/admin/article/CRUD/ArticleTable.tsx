@@ -1,7 +1,7 @@
 import readArticleByIdAction from "@/actions/article/readArticleByIdAction";
 import Link from "next/link";
 import React from "react";
-import { PiEye, PiPencilLine, PiTrash } from "react-icons/pi";
+import { PiEye, PiPencilLine } from "react-icons/pi";
 import DeleteButton from "../../global/DeleteButton";
 
 export default async function ArticleTable({ id }: { id: string | undefined }) {
@@ -28,15 +28,15 @@ export default async function ArticleTable({ id }: { id: string | undefined }) {
             <td className="p-2 text-center">
               {new Date(article.created_at).toDateString()}
             </td>
-            <td className="p-2 text-center border-x border-neutral-900">
-              {article.category[0].category}
+            <td className="p-2 text-center capitalize border-x border-neutral-900">
+              {article.category?.category}
             </td>
             <td className="p-2 text-center">
               {article.status === true ? "Public" : "Private"}
             </td>
             <td className="p-2 border-l border-neutral-900 text-center flex items-center justify-center gap-2">
               <Link
-                href={`/${article.category[0].category}/${article.slug}`}
+                href={`/${article.category?.category}/${article.slug}`}
                 aria-label="Read"
                 className="hover:text-blue-500"
               >

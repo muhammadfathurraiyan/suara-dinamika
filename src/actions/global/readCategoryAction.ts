@@ -2,12 +2,8 @@
 import { unstable_noStore as noStore } from "next/cache";
 import { createSupabaseServerClient } from "@/libs/supabase";
 
-export default async function readArticleByIdAction(id: string) {
+export default async function readCategoryAction() {
   noStore();
   const supabase = await createSupabaseServerClient();
-  const article = supabase
-    .from("article")
-    .select("*, category(category)")
-    .eq("created_by", id);
-  return article;
+  return supabase.from("category").select("*");
 }

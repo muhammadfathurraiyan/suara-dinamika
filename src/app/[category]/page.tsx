@@ -1,9 +1,9 @@
 import readArticleAction from "@/actions/global/readArticleAction";
+import readCategoryAction from "@/actions/global/readCategoryAction";
 import ListCategory from "@/components/category/ListCategory";
 import MainCategory from "@/components/category/MainCategory";
 import Popular from "@/components/category/Popular";
 import Recomendation from "@/components/category/Recomendation";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export const revalidate = 0;
@@ -13,23 +13,14 @@ export default async function Category({
 }: {
   params: { category: string };
 }) {
-  const parameter = [
-    "budaya",
-    "edukasi",
-    "lingkungan",
-    "opini",
-    "sejarah",
-    "seni",
-    "teknologi",
-    "olahraga",
-    "sastra",
-    "travel",
-    "sains",
-  ];
+  const { data: parameter } = await readCategoryAction();
   const { data } = await readArticleAction(category);
-  const mainCategories = data?.slice(-3)
-  const listCategories = data?.slice(0, -3)
-  if (parameter.includes(category)) {
+  const mainCategories = data?.slice(-3);
+  const listCategories = data?.slice(0, -3);
+  if (
+    parameter?.some((i) => i.category.includes(category)) ||
+    data?.length! >= 3
+  ) {
     return (
       <section className="px-36 max-xl:px-12 max-md:px-4 py-8 flex flex-col gap-2">
         <div className="max-md:mt-40">

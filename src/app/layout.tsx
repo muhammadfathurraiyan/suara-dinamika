@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/global/Header";
+import Header from "@/components/global/header/Header";
 import Footer from "@/components/global/Footer";
 import { Suspense } from "react";
 import Loading from "./loading";

@@ -1,13 +1,16 @@
+import readCategoryAction from "@/actions/global/readCategoryAction";
 import ArticleForm from "@/components/admin/article/CRUD/ArticleForm";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PiArrowLeftBold } from "react-icons/pi";
 
-export default function Crud({
+export default async function Crud({
   params: { crud },
 }: {
   params: { crud: string };
 }) {
+  const { data: categories } = await readCategoryAction();
+
   if (crud.includes("buat-article") || crud.includes("edit-article")) {
     return (
       <div className="relative px-4 py-12 flex flex-col gap-12">
@@ -40,7 +43,7 @@ export default function Crud({
               : crud.replace("-", " ").slice(0, 12)}
             :
           </p>
-          <ArticleForm crud={crud} />
+          <ArticleForm categories={categories} crud={crud} />
         </div>
       </div>
     );

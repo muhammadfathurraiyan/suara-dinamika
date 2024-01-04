@@ -12,6 +12,7 @@ export interface Database {
       article: {
         Row: {
           body: string;
+          category_id: string;
           created_at: string;
           created_by: string;
           id: string;
@@ -19,9 +20,11 @@ export interface Database {
           slug: string;
           status: boolean;
           title: string;
+          view: number | null;
         };
         Insert: {
           body: string;
+          category_id: string;
           created_at?: string;
           created_by?: string;
           id?: string;
@@ -29,9 +32,11 @@ export interface Database {
           slug: string;
           status: boolean;
           title: string;
+          view?: number | null;
         };
         Update: {
           body?: string;
+          category_id?: string;
           created_at?: string;
           created_by?: string;
           id?: string;
@@ -39,37 +44,35 @@ export interface Database {
           slug?: string;
           status?: boolean;
           title?: string;
+          view?: number | null;
         };
-        Relationships: [];
+        Relationships: [
+          {
+            foreignKeyName: "article_category_id_fkey";
+            columns: ["category_id"];
+            isOneToOne: false;
+            referencedRelation: "category";
+            referencedColumns: ["id"];
+          }
+        ];
       };
       category: {
         Row: {
-          article_id: string;
           category: string;
           created_at: string;
           id: string;
         };
         Insert: {
-          article_id: string;
           category: string;
           created_at?: string;
           id?: string;
         };
         Update: {
-          article_id?: string;
           category?: string;
           created_at?: string;
           id?: string;
         };
-        Relationships: [
-          {
-            foreignKeyName: "category_article_id_fkey";
-            columns: ["article_id"];
-            isOneToOne: false;
-            referencedRelation: "article";
-            referencedColumns: ["id"];
-          }
-        ];
+        Relationships: [];
       };
       permission: {
         Row: {
