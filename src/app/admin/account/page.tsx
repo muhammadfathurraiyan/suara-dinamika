@@ -10,7 +10,7 @@ export default function Account() {
           <h2 className="text-xl font-bold ">Tampilan profile anda:</h2>
           <div className="flex items-center gap-2 border border-neutral-900/30 w-fit p-2 shadow-md">
             <img
-              className="w-16 rounded-full"
+              className="w-16 h-16 object-cover rounded-full"
               src="https://picsum.photos/600"
               alt=""
             />

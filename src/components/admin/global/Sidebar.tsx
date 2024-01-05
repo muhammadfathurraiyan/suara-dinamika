@@ -17,7 +17,7 @@ export default async function Sidebar() {
       <div className="flex items-center gap-2">
         <>
           <Image
-            className="w-12 h-12 rounded-full"
+            className="w-12 h-12 object-cover rounded-full"
             src={profile.user?.image!}
             alt="profile pic"
             width={1}
