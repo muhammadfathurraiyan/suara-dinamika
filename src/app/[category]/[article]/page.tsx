@@ -11,6 +11,7 @@ import { FaFacebookF, FaTelegramPlane } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { IoShareSocialSharp, IoLogoWhatsapp } from "react-icons/io5";
 import { notFound } from "next/navigation";
+import timeAgoOrDate from "@/libs/action/timeAgoOrDate";
 
 export default async function Article({
   params: { article },
@@ -25,31 +26,15 @@ export default async function Article({
   }
   const { data: editor } = await readUserProfileAction(articles.created_by);
 
-  function timeAgoOrDate(date: Date): string {
-    const now = new Date();
-    const seconds = Math.floor((now.getTime() - date.getTime()) / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
-
-    if (days > 1) {
-      return date.toDateString();
-    } else if (hours > 0) {
-      return `${hours} jam yang lalu`;
-    } else if (minutes > 0) {
-      return `${minutes} menit yang lalu`;
-    } else {
-      return "kurang dari satu menit yang lalu";
-    }
-  }
-
   if (parameter?.some((i) => i.slug.includes(article))) {
     return (
       <section className="px-36 max-xl:px-12 max-md:px-4 py-8 flex flex-col gap-2">
         <div className="grid grid-cols-3 max-md:grid-cols-1 gap-2">
           <div className="md:col-span-2 flex flex-col gap-2 mb-80">
             <h1 className="font-bold text-3xl uppercase">{articles.title}</h1>
-            <p className="text-xs">&#8226; 10 menit yang lalu</p>
+            <p className="text-xs">
+              &#8226; {timeAgoOrDate(new Date(articles.created_at))}
+            </p>
             <div className="flex gap-2 items-center">
               <Link
                 href="/"
