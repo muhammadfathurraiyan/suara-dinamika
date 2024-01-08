@@ -34,6 +34,4 @@ export default async function editArticleAction(data: unknown, id: string) {
   if (validResult.error?.message) {
     return { error: validResult.error.message };
   }
-
-  return redirect("/admin/article");
 }

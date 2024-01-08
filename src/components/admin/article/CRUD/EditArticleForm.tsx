@@ -1,6 +1,6 @@
 import Editor from "../editor/Editor";
 import ImageInput from "../../global/ImageInput";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import readArticleForEditAction from "@/actions/article/readArticleForEditAction";
 import TitleSlugCategoryStatus from "./TitleSlugCategoryStatus";
 import { CreateArticleSchema } from "@/libs/types/zodtypes";
@@ -55,6 +55,8 @@ export default async function EditArticleForm({
     if (createArticleResult?.error) {
       error = createArticleResult.error;
     }
+
+    return redirect("/admin/article");
   };
 
   return (
