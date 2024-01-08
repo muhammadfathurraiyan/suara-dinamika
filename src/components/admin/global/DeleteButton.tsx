@@ -1,4 +1,5 @@
 "use client";
+import deleteAllArticleByIdAction from "@/actions/article/deleteAllArticleByIdAction";
 import deleteArticleByIdAction from "@/actions/article/deleteArticleByIdAction";
 import deleteUserAction from "@/actions/user/deleteUserAction";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -14,12 +15,17 @@ const ConfirmDeleteModal = ({
   setModal: Dispatch<SetStateAction<boolean>>;
 }) => {
   const deleteClientAction = async () => {
-    if (string?.includes("article")) {
+    if (string === "article") {
       const result = await deleteArticleByIdAction(id);
       if (result?.error) {
         alert(result.error);
       }
       setModal(false);
+    } else if (string === "articles") {
+      const result = await deleteAllArticleByIdAction(id);
+      if (result?.error) {
+        alert(result.error);
+      }
     } else {
       const result = await deleteUserAction(id);
       if (result?.error) {
