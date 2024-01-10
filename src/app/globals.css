@@ -52,16 +52,6 @@
   .editor-code:before {
     @apply content-[attr(data-gutter)] absolute bg-neutral-700 text-neutral-100 left-0 top-0 py-2 px-4 whitespace-pre-wrap text-right min-w-[25px];
   }
-  /* .editor-code:after {
-    content: attr(data-highlight-language);
-    top: 0;
-    right: 3px;
-    padding: 3px;
-    font-size: 10px;
-    text-transform: uppercase;
-    position: absolute;
-    color: rgba(0, 0, 0, 0.5);
-  } */
 
   .editor-tokenComment {
     @apply text-neutral-500;
