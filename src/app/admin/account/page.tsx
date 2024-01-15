@@ -15,7 +15,7 @@ export default async function Account() {
         <p>Halaman untuk melakukan setting account.</p>
       </div>
       <div className="flex flex-col gap-12">
-        <ProfileCard />
+        <ProfileCard profile={profile} />
         <EditProfile />
         <EditPassword />
       </div>

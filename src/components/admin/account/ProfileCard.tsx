@@ -1,4 +1,20 @@
-export default function ProfileCard() {
+export default function ProfileCard({
+  profile,
+}: {
+  profile: {
+    created_at: string;
+    id: string;
+    role: string;
+    user_id: string;
+    user: {
+      created_at: string;
+      email: string;
+      id: string;
+      image: string;
+      name: string;
+    } | null;
+  };
+}) {
   return (
     <div className="flex flex-col gap-1">
       <h2 className="text-xl font-bold ">Tampilan profile anda:</h2>
