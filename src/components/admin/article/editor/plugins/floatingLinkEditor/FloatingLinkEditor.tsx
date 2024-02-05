@@ -27,6 +27,22 @@ import { sanitizeUrl } from "../../utils/sanitizeUrl";
 import Link from "next/link";
 import { PiCheck, PiPencilSimpleLine, PiTrash, PiX } from "react-icons/pi";
 
+const LowPriority = 1;
+
+function positionEditorElement(editor: any, rect: any) {
+  if (rect === null) {
+    editor.style.opacity = "0";
+    editor.style.top = "-1000px";
+    editor.style.left = "-1000px";
+  } else {
+    editor.style.opacity = "1";
+    editor.style.top = `${rect.top + rect.height + window.pageYOffset + 10}px`;
+    editor.style.left = `${
+      rect.left + window.pageXOffset - editor.offsetWidth / 2 + rect.width / 2
+    }px`;
+  }
+}
+
 export default function FloatingLinkEditor({
   editor,
   anchorElem,
@@ -34,8 +50,9 @@ export default function FloatingLinkEditor({
   editor: LexicalEditor;
   anchorElem: HTMLElement;
 }): JSX.Element {
-  const editorRef = useRef<HTMLDivElement | null>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const editorRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const mouseDownRef = useRef(false);
   const [linkUrl, setLinkUrl] = useState("");
   const [isEditMode, setEditMode] = useState(false);
   const [lastSelection, setLastSelection] = useState<BaseSelection | null>(
@@ -45,17 +62,14 @@ export default function FloatingLinkEditor({
   const updateLinkEditor = useCallback(() => {
     const selection = $getSelection();
     if ($isRangeSelection(selection)) {
-      // const node = getSelectedNode(selection);
-      if ($isRangeSelection(selection)) {
-        const node = getSelectedNode(selection);
-        const parent = node.getParent();
-        if ($isLinkNode(parent)) {
-          setLinkUrl(parent.getURL());
-        } else if ($isLinkNode(node)) {
-          setLinkUrl(node.getURL());
-        } else {
-          setLinkUrl("");
-        }
+      const node = getSelectedNode(selection);
+      const parent = node.getParent();
+      if ($isLinkNode(parent)) {
+        setLinkUrl(parent.getURL());
+      } else if ($isLinkNode(node)) {
+        setLinkUrl(node.getURL());
+      } else {
+        setLinkUrl("");
       }
     }
     const editorElem = editorRef.current;
@@ -67,32 +81,37 @@ export default function FloatingLinkEditor({
     }
 
     const rootElement = editor.getRootElement();
-
     if (
       selection !== null &&
-      nativeSelection !== null &&
+      !nativeSelection!.isCollapsed &&
       rootElement !== null &&
-      rootElement.contains(nativeSelection.anchorNode) //&&
-      // editor.isEditable()
+      rootElement.contains(nativeSelection!.anchorNode)
     ) {
-      const domRect: DOMRect | undefined =
-        nativeSelection.focusNode?.parentElement?.getBoundingClientRect();
-      if (domRect) {
-        domRect.y += 40;
-        setFloatingElemPositionForLinkEditor(domRect, editorElem, anchorElem);
+      const domRange = nativeSelection!.getRangeAt(0);
+      let rect;
+      if (nativeSelection!.anchorNode === rootElement) {
+        let inner = rootElement;
+        while (inner.firstElementChild != null) {
+          inner = inner.firstElementChild as HTMLElement;
+        }
+        rect = inner.getBoundingClientRect();
+      } else {
+        rect = domRange.getBoundingClientRect();
+      }
+
+      if (!mouseDownRef.current) {
+        positionEditorElement(editorElem, rect);
       }
       setLastSelection(selection);
     } else if (!activeElement || activeElement.className !== "link-input") {
-      if (rootElement !== null) {
-        setFloatingElemPositionForLinkEditor(null, editorElem, anchorElem);
-      }
+      positionEditorElement(editorElem, null);
       setLastSelection(null);
       setEditMode(false);
       setLinkUrl("");
     }
 
     return true;
-  }, [editor]); //anchorElem, setIsLinkEditMode, isLinkEditMode, linkUrl
+  }, [editor]);
 
   useEffect(() => {
     return mergeRegister(
@@ -108,7 +127,7 @@ export default function FloatingLinkEditor({
           updateLinkEditor();
           return true;
         },
-        COMMAND_PRIORITY_LOW
+        LowPriority
       )
     );
   }, [editor, updateLinkEditor]);
@@ -126,72 +145,48 @@ export default function FloatingLinkEditor({
   }, [isEditMode]);
 
   return (
-    <div
-      className="absolute rounded z-20 top-0 left-0 transition-opacity duration-300 -mt-2 max-w-[300px] w-full flex shadow-md bg-neutral-100"
-      ref={editorRef}
-    >
-      <div className="flex items-center w-full px-2">
-        {isEditMode ? (
-          <input
-            ref={inputRef}
-            className="link-input w-full outline-none"
-            value={linkUrl}
-            onChange={(event) => {
-              setLinkUrl(event.target.value);
-            }}
-            onKeyDown={(event) => {
-              if (event.key === "Enter") {
-                event.preventDefault();
-                if (lastSelection !== null) {
-                  if (linkUrl !== "") {
-                    editor.dispatchCommand(TOGGLE_LINK_COMMAND, linkUrl);
-                  }
-                  setEditMode(false);
+    <div ref={editorRef} className="link-editor">
+      {isEditMode ? (
+        <input
+          ref={inputRef}
+          className="link-input"
+          value={linkUrl}
+          onChange={(event) => {
+            setLinkUrl(event.target.value);
+          }}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              event.preventDefault();
+              if (lastSelection !== null) {
+                if (linkUrl !== "") {
+                  editor.dispatchCommand(TOGGLE_LINK_COMMAND, linkUrl);
                 }
-              } else if (event.key === "Escape") {
-                event.preventDefault();
                 setEditMode(false);
               }
-            }}
-          />
-        ) : (
-          <Link
-            className="w-full"
-            href={sanitizeUrl(linkUrl)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {linkUrl}
-          </Link>
-        )}
-        <div className="flex items-center">
-          <div
-            className="p-2 bg-neutral-900 hover:bg-neutral-900/90 duration-300 text-neutral-100 text-xl"
-            role="button"
-            tabIndex={0}
-            onMouseDown={(event) => event.preventDefault()}
-            onClick={() => {
-              setEditMode(!isEditMode);
-            }}
-          >
-            {isEditMode ? (
-              <PiCheck
-                onClick={(event: React.MouseEvent) => {
-                  event.preventDefault();
-                  if (lastSelection !== null) {
-                    if (linkUrl !== "") {
-                      editor.dispatchCommand(TOGGLE_LINK_COMMAND, linkUrl);
-                    }
-                    setEditMode(false);
-                  }
-                }}
-              />
-            ) : (
-              <PiPencilSimpleLine />
-            )}
+            } else if (event.key === "Escape") {
+              event.preventDefault();
+              setEditMode(false);
+            }
+          }}
+        />
+      ) : (
+        <>
+          <div className="link-input">
+            <a href={linkUrl} target="_blank" rel="noopener noreferrer">
+              {linkUrl}
+            </a>
+            <div
+              className="link-edit"
+              role="button"
+              tabIndex={0}
+              onMouseDown={(event) => event.preventDefault()}
+              onClick={() => {
+                setEditMode(true);
+              }}
+            />
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 }
