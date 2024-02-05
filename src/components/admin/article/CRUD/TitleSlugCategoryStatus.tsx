@@ -26,7 +26,16 @@ export default function TitleSlugCategoryStatus({
 
   const handleSlug = (e: ChangeEvent<HTMLInputElement>) => {
     let data = e.target.value;
-    setEditSlug(data.replaceAll(" ", "-").toLowerCase());
+    setEditSlug(
+      data
+        .replaceAll(" ", "-")
+        .replaceAll(",", "")
+        .replaceAll(".", "")
+        .replaceAll("?", "")
+        .replaceAll("!", "")
+        .replaceAll("/", "")
+        .toLowerCase()
+    );
   };
 
   const handleCategory = (e: ChangeEvent<HTMLSelectElement>) => {

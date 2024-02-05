@@ -18,9 +18,6 @@ export default function Navigation({
   const handleToggle = () => {
     setToggle(!toggle);
   };
-
-  const mainCategories = data?.slice(0, -3);
-  const remainCategories = data?.slice(-3);
   return (
     <>
       <nav
@@ -36,7 +33,7 @@ export default function Navigation({
         <div onClick={handleToggle} className="cursor-pointer md:hidden">
           <PiList size={28} />
         </div>
-        {mainCategories?.map((data) => (
+        {data?.map((data) => (
           <Link
             key={data.category}
             className="group relative uppercase max-md:hidden"
@@ -46,21 +43,6 @@ export default function Navigation({
             <span className="absolute duration-300 h-[1px] w-0 group-hover:w-full bg-neutral-900 left-0 bottom-0" />
           </Link>
         ))}
-        <div className="relative group max-md:hidden flex items-center">
-          LAINYA <PiCaretDown className="group-hover:rotate-180 duration-300" />
-          <div className="absolute z-20 invisible group-hover:visible opacity-0 group-hover:opacity-100 flex duration-300 bg-neutral-100 border border-neutral-900/30 flex-col gap-2 items-start -left-6 top-8 py-4 px-6">
-            {remainCategories?.map((data) => (
-              <Link
-                key={data.category}
-                className="relative uppercase group/link"
-                href={`/${data.category}`}
-              >
-                {data.category}
-                <span className="absolute duration-300 h-[1px] w-0 group-hover/link:w-full bg-neutral-900 left-0 bottom-0" />
-              </Link>
-            ))}
-          </div>
-        </div>
       </nav>
       <aside
         className={`${

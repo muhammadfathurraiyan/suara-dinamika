@@ -12,6 +12,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import { IoShareSocialSharp, IoLogoWhatsapp } from "react-icons/io5";
 import { notFound } from "next/navigation";
 import timeAgoOrDate from "@/libs/action/timeAgoOrDate";
+import addViewAction from "@/actions/global/addViewAction";
 
 export default async function Article({
   params: { article },
@@ -25,6 +26,7 @@ export default async function Article({
     return notFound();
   }
   const { data: editor } = await readUserProfileAction(articles.created_by);
+  const result = await addViewAction(articles.id);
 
   if (parameter?.some((i) => i.slug.includes(article))) {
     return (
