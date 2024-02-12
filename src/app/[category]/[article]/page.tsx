@@ -13,7 +13,6 @@ import { notFound } from "next/navigation";
 import timeAgoOrDate from "@/libs/action/timeAgoOrDate";
 import addViewAction from "@/actions/global/addViewAction";
 import { Metadata, ResolvingMetadata } from "next";
-import OpenGraphImage from "./opengraph-image";
 
 type Props = {
   params: { article: string };
@@ -29,12 +28,23 @@ export async function generateMetadata(
   // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || [];
 
-  const imageUrl = await OpenGraphImage(data?.[0].image);
-
   return {
     title: data?.[0].title,
     openGraph: {
-      images: [imageUrl, ...previousImages],
+      title: data?.[0].title,
+      images: [
+        {
+          url: `https://suara-dinamika.vercel.app/api/og?id=${data?.[0].slug}`,
+        },
+        ...previousImages,
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: data?.[0].title,
+      images: [
+        `https://suara-dinamika.vercel.app/api/og?id=${data?.[0].slug}`,
+      ],
     },
   };
 }
