@@ -46,7 +46,7 @@ export default function Terbaru({
               </p>
             </div>
           </Link>
-          <div className="grid grid-rows-2 max-md:hidden gap-2 h-96">
+          <div className="grid md:grid-rows-2 max-md:grid-cols-2 gap-2 md:h-96 max-md:h-48">
             <Link
               href={`/${data?.[4].category?.category}/${data?.[4].slug}`}
               className="group overflow-hidden relative"
@@ -91,7 +91,7 @@ export default function Terbaru({
         </div>
         <div className="grid grid-cols-3 max-md:grid-cols-2 gap-2">
           <Link
-            href={`/${data?.[3].category?.category}/${data?.[3].slug}`}
+            href={`/${data?.[2].category?.category}/${data?.[2].slug}`}
             className="group h-48 relative overflow-hidden"
           >
             <Image
@@ -132,7 +132,7 @@ export default function Terbaru({
           </Link>
           <Link
             href={`/${data?.[0].category?.category}/${data?.[0].slug}`}
-            className="group h-48 relative overflow-hidden"
+            className="group h-48 max-md:hidden relative overflow-hidden"
           >
             <Image
               className="min-w-full h-full object-cover group-hover:scale-105 duration-300"
