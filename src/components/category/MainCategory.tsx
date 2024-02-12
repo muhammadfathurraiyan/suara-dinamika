@@ -7,20 +7,12 @@ export default function MainCategory({
 }: {
   data:
     | {
-        body: string;
-        category_id: string;
-        created_at: string;
-        created_by: string;
         id: string;
         image: string;
         slug: string;
-        status: boolean;
         title: string;
-        view: number | null;
         category: {
           category: string;
-          created_at: string;
-          id: string;
         } | null;
       }[]
     | undefined;
@@ -40,7 +32,7 @@ export default function MainCategory({
             width={1}
             height={1}
           />
-          <div className="absolute bottom-0 left-0 p-2 pt-8 flex flex-col gap-2 bg-gradient-to-t from-neutral-900/50 to-transparent">
+          <div className="absolute bottom-0 left-0 w-full p-2 pt-8 flex flex-col gap-2 bg-gradient-to-t from-neutral-900/50 to-transparent">
             <h2 className="md:text-2xl font-medium text-neutral-100">
               {data![2].title}
             </h2>
@@ -62,7 +54,7 @@ export default function MainCategory({
               width={1}
               height={1}
             />
-            <div className="absolute bottom-0 left-0 p-2 pt-3 flex flex-col gap-2 bg-gradient-to-t from-neutral-900/50 to-transparent">
+            <div className="absolute bottom-0 left-0 w-full p-2 pt-3 flex flex-col gap-2 bg-gradient-to-t from-neutral-900/50 to-transparent">
               <h2 className="font-medium text-neutral-100">{data![1].title}</h2>
               <p className="p-2 bg-neutral-900 uppercase text-neutral-100 w-fit text-xs">
                 {data![1].category?.category}
@@ -81,7 +73,7 @@ export default function MainCategory({
               width={1}
               height={1}
             />
-            <div className="absolute bottom-0 left-0 p-2 pt-3 flex flex-col gap-2 bg-gradient-to-t from-neutral-900/50 to-transparent">
+            <div className="absolute bottom-0 left-0 w-full p-2 pt-3 flex flex-col gap-2 bg-gradient-to-t from-neutral-900/50 to-transparent">
               <h2 className="font-medium text-neutral-100">{data![0].title}</h2>
               <p className="p-2 bg-neutral-900 uppercase text-neutral-100 w-fit text-xs">
                 {data![0].category?.category}

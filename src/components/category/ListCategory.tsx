@@ -6,20 +6,12 @@ export default function ListCategory({
 }: {
   data:
     | {
-        body: string;
-        category_id: string;
-        created_at: string;
-        created_by: string;
         id: string;
         image: string;
         slug: string;
-        status: boolean;
         title: string;
-        view: number | null;
         category: {
           category: string;
-          created_at: string;
-          id: string;
         } | null;
       }[]
     | undefined;

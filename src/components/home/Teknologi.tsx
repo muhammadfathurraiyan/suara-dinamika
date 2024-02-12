@@ -79,29 +79,6 @@ export default function Teknologi() {
                 </div>
               </div>
             </div>
-            <div className="grid md:grid-cols-2 border border-neutral-900/30 max-md:grid-rows-2 w-full h-48 max-md:h-96 gap-2">
-              <div className=" group overflow-hidden">
-                <img
-                  className="min-w-full max-h-full object-cover group-hover:scale-105 duration-300"
-                  src="https://picsum.photos/600"
-                  alt=""
-                />
-              </div>
-              <div className="flex flex-col p-2 justify-between items-start">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <h2 className="font-medium md:text-lg">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Veritatis, sapiente quos. Eum, recusandae.
-                  </h2>
-                  <p className="text-xs">&#8226; 10 menit yang lalu</p>
-                </div>
-                <div className="flex items-center gap-2 flex-wrap">
-                  <p className="p-2 bg-neutral-900 text-neutral-100 w-fit text-xs">
-                    BUDAYA
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
