@@ -1,7 +1,6 @@
 import readAllSlugAction from "@/actions/global/readAllSlugAction";
 import readUserProfileAction from "@/actions/global/readUserProfileAction";
 import readArticleBySlugAction from "@/actions/global/readArticleBySlugAction";
-import readUserAction from "@/actions/user/readUserAction";
 import Body from "@/components/article/Body";
 import Popular from "@/components/category/Popular";
 import Recomendation from "@/components/category/Recomendation";
@@ -13,12 +12,31 @@ import { IoShareSocialSharp, IoLogoWhatsapp } from "react-icons/io5";
 import { notFound } from "next/navigation";
 import timeAgoOrDate from "@/libs/action/timeAgoOrDate";
 import addViewAction from "@/actions/global/addViewAction";
+import { Metadata, ResolvingMetadata } from "next";
 
-export default async function Article({
-  params: { article },
-}: {
+type Props = {
   params: { article: string };
-}) {
+};
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // fetch data
+  const { data } = await readArticleBySlugAction(params.article);
+
+  // optionally access and extend (rather than replace) parent metadata
+  const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: data?.[0].title,
+    openGraph: {
+      images: [data?.[0].image!, ...previousImages],
+    },
+  };
+}
+
+export default async function Article({ params: { article } }: Props) {
   const { data: parameter } = await readAllSlugAction();
   const { data } = await readArticleBySlugAction(article);
   const articles = data![0];

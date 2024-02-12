@@ -1,6 +1,12 @@
 import About from "@/components/tentang/About";
 import Beranda from "@/components/tentang/Beranda";
 import Kontak from "@/components/tentang/Kontak";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Tentang",
+  description: "Mengenal lebih jauh tentang Suara Dinamika.",
+};
 
 export default function Tentang() {
   return (

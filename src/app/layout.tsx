@@ -12,8 +12,8 @@ const notoSans = Noto_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Suara Dinamika",
-  description: "Unik, Terpercaya.",
+  title: { template: "%s - Suara Dinamika", default: "Suara Dinamika" },
+  description: "Media literasi digital dengan informasi unik dan komunikatif.",
 };
 
 export default function RootLayout({

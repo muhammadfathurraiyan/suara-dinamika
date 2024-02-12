@@ -4,23 +4,30 @@ import ListCategory from "@/components/category/ListCategory";
 import MainCategory from "@/components/category/MainCategory";
 import Popular from "@/components/category/Popular";
 import Recomendation from "@/components/category/Recomendation";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 export const revalidate = 0;
 
-export default async function Category({
-  params: { category },
-}: {
+type Props = {
   params: { category: string };
-}) {
+};
+
+export async function generateMetadata(
+  { params }: Props,
+): Promise<Metadata> {
+  return {
+    title: params.category.charAt(0).toUpperCase() + params.category.slice(1),
+    description: `Halaman kategori ${params.category}, temukan berita pilihan anda.`,
+  };
+}
+
+export default async function Category({ params: { category } }: Props) {
   const { data: parameter } = await readCategoryAction();
   const { data } = await readArticleAction(category);
   const mainCategories = data?.slice(-3);
   const listCategories = data?.slice(0, -3);
-  if (
-    parameter?.some((i) => i.category.includes(category)) ||
-    data?.length! >= 3
-  ) {
+  if (parameter?.some((i) => i.category.includes(category))) {
     return (
       <section className="px-36 max-xl:px-12 max-md:px-4 py-8 flex flex-col gap-2">
         <div className="max-md:mt-40">
