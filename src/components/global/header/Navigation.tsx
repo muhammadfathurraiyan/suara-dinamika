@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import { PiCaretDown, PiList, PiX } from "react-icons/pi";
+import { PiCaretDown, PiList, PiMagnifyingGlass, PiX } from "react-icons/pi";
 
 export default function Navigation({
   data,
@@ -17,6 +17,15 @@ export default function Navigation({
   const [toggle, setToggle] = useState(false);
   const handleToggle = () => {
     setToggle(!toggle);
+  };
+  const [title, setTitle] = useState<String>();
+  const router = useRouter();
+  const search = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    if (title !== undefined) {
+      router.push(`/search/${title}`);
+    }
+    setToggle(false);
   };
   return (
     <>
@@ -58,6 +67,21 @@ export default function Navigation({
             <p className="text-xs italic font-light">Unik & Komunikatif.</p>
           </div>
         </div>
+        <form className="flex items-center relative w-full mb-4" action="">
+          <input
+            type="text"
+            placeholder="Cari Artikel"
+            onChange={(e) => setTitle(e.target.value)}
+            className="p-1 w-full focus:outline-none border border-slate-100 bg-neutral-100 text-neutral-900"
+          />
+          <button
+            onClick={(e) => search(e)}
+            aria-label="Search"
+            className="p-2 flex items-center gap-2 text-neutral-100 bg-neutral-100/10 hover:bg-neutral-900 duration-300"
+          >
+            <PiMagnifyingGlass size={18} />
+          </button>
+        </form>
         {data?.map((data) => (
           <Link
             key={data.category}

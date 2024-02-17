@@ -2,8 +2,8 @@ import readAllSlugAction from "@/actions/global/readAllSlugAction";
 import readUserProfileAction from "@/actions/global/readUserProfileAction";
 import readArticleBySlugAction from "@/actions/global/readArticleBySlugAction";
 import Body from "@/components/article/Body";
-import Popular from "@/components/category/Popular";
-import Recomendation from "@/components/category/Recomendation";
+import Popular from "@/components/global/Popular";
+import Recomendation from "@/components/global/Recomendation";
 import Image from "next/image";
 import Link from "next/link";
 import { FaFacebookF, FaTelegramPlane } from "react-icons/fa";
@@ -42,9 +42,7 @@ export async function generateMetadata(
     twitter: {
       card: "summary_large_image",
       title: data?.[0].title,
-      images: [
-        `https://suara-dinamika.vercel.app/api/og?id=${data?.[0].slug}`,
-      ],
+      images: [`https://suara-dinamika.vercel.app/api/og?id=${data?.[0].slug}`],
     },
   };
 }

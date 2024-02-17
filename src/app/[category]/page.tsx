@@ -1,9 +1,9 @@
 import readArticleAction from "@/actions/global/readArticleAction";
 import readCategoryAction from "@/actions/global/readCategoryAction";
-import ListCategory from "@/components/category/ListCategory";
+import ListCategory from "@/components/global/ListCategory";
 import MainCategory from "@/components/category/MainCategory";
-import Popular from "@/components/category/Popular";
-import Recomendation from "@/components/category/Recomendation";
+import Popular from "@/components/global/Popular";
+import Recomendation from "@/components/global/Recomendation";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -13,9 +13,7 @@ type Props = {
   params: { category: string };
 };
 
-export async function generateMetadata(
-  { params }: Props,
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: params.category.charAt(0).toUpperCase() + params.category.slice(1),
     description: `Halaman kategori ${params.category}, temukan berita pilihan anda.`,

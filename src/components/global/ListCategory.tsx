@@ -14,7 +14,8 @@ export default function ListCategory({
           category: string;
         } | null;
       }[]
-    | undefined;
+    | undefined
+    | null;
 }) {
   if (data?.length! !== 0) {
     return (
@@ -49,9 +50,6 @@ export default function ListCategory({
             </div>
           </Link>
         ))}
-        <button className="p-2 bg-neutral-900 text-neutral-100 w-fit hover:bg-neutral-900/90 duration-300">
-          LAINYA
-        </button>
       </div>
     );
   } else {

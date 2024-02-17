@@ -1,11 +1,19 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import React from "react";
+import { usePathname, useRouter } from "next/navigation";
+import React, { useState } from "react";
 import { PiMagnifyingGlass } from "react-icons/pi";
 
 export default function LogoAndSearchBar() {
   const path = usePathname();
+  const [title, setTitle] = useState<String>();
+  const router = useRouter();
+  const search = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    if (title !== undefined) {
+      router.push(`/search/${title}`);
+    }
+  };
   return (
     <div
       className={`px-36 ${path === "/" ? "mt-80" : "mt-0"} ${
@@ -27,9 +35,11 @@ export default function LogoAndSearchBar() {
             <input
               type="text"
               placeholder="Cari Artikel"
+              onChange={(e) => setTitle(e.target.value)}
               className="border border-neutral-900 p-1 w-72 focus:outline-none bg-transparent"
             />
             <button
+              onClick={(e) => search(e)}
               aria-label="Search"
               className="absolute right-0 p-2 flex items-center gap-2 text-neutral-100 bg-neutral-900 hover:bg-neutral-900/90 duration-300"
             >
