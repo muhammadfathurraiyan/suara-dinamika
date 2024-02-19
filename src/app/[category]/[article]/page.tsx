@@ -57,6 +57,9 @@ export default async function Article({ params: { article } }: Props) {
   const { data: editor } = await readUserProfileAction(articles.created_by);
   const result = await addViewAction(articles.id);
 
+  const link: string = "https://suara-dinamika.vercel.app";
+  const wa = `https://api.whatsapp.com/send/?text=${link}/${articles.category?.category}/${articles.slug}&type=custom_url&app_absent=0`;
+
   if (parameter?.some((i) => i.slug.includes(article))) {
     return (
       <section className="px-36 max-xl:px-12 max-md:px-4 py-8 flex flex-col gap-2">
@@ -68,7 +71,7 @@ export default async function Article({ params: { article } }: Props) {
             </p>
             <div className="flex gap-2 items-center">
               <Link
-                href="/"
+                href={wa}
                 aria-label="Whatsapp"
                 className="p-2 text-neutral-100 bg-green-500 text-2xl"
               >
